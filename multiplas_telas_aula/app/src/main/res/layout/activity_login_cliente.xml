@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginClienteActivity">
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="77dp"
+        android:layout_marginTop="55dp"
+        android:layout_marginEnd="77dp"
+        android:layout_marginBottom="636dp"
+        android:text="Olá, meu cliente"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="112dp"
+        android:text="Digite seu e-mail"
+        app:layout_constraintBottom_toTopOf="@+id/emailPrest"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="188dp"
+        android:text="Digite sua senha"
+        app:layout_constraintBottom_toTopOf="@+id/emailPrest"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/senhaCliente"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginBottom="468dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:text="ex"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/emailCliente"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:text="teste@gmail.com"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.477"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <Button
+        android:id="@+id/logarUserCliente"
+        android:layout_width="184dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="114dp"
+        android:layout_marginTop="81dp"
+        android:layout_marginEnd="114dp"
+        android:layout_marginBottom="32dp"
+        android:text="Logar"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/limpUserCliente"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/senhaCliente" />
+
+    <Button
+        android:id="@+id/limpUserCliente"
+        android:layout_width="184dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="114dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="114dp"
+        android:layout_marginBottom="33dp"
+        android:backgroundTint="#216106"
+        android:text="Limpar"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/sairUserCliente"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logarUserCliente" />
+
+    <Button
+        android:id="@+id/sairUserCliente"
+        android:layout_width="184dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="114dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="114dp"
+        android:layout_marginBottom="94dp"
+        android:backgroundTint="#990606"
+        android:text="Sair"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/limpUserCliente" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
