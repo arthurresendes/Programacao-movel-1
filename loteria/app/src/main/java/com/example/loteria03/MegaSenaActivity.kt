@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.TextView
@@ -17,6 +18,7 @@ class MegaSenaActivity : AppCompatActivity() {
     private lateinit var btmega: Button
     private lateinit var qtdJogos: EditText
     private lateinit var container: LinearLayout
+    private lateinit var btVoltar: ImageButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -24,6 +26,7 @@ class MegaSenaActivity : AppCompatActivity() {
         selectbox = findViewById<Spinner>(R.id.selecionarMega)
         btmega = findViewById<Button>(R.id.btmegajogo)
         qtdJogos = findViewById<EditText>(R.id.qtdjogos)
+        btVoltar = findViewById<ImageButton>(R.id.voltar)
         container = findViewById<LinearLayout>(R.id.linearcontainer)
 
         val opcoes = (6..20).toList()
@@ -53,6 +56,9 @@ class MegaSenaActivity : AppCompatActivity() {
             }
         }
 
+        btVoltar.setOnClickListener {
+            finish()
+        }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())

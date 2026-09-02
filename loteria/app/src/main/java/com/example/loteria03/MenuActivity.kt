@@ -3,6 +3,7 @@ package com.example.loteria03
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -13,6 +14,7 @@ class MenuActivity : AppCompatActivity() {
     private lateinit var quina: Button
     private lateinit var lotomania: Button
     private lateinit var lotofacil: Button
+    private lateinit var btVoltar: ImageButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -21,29 +23,30 @@ class MenuActivity : AppCompatActivity() {
         quina = findViewById<Button>(R.id.btquina)
         lotofacil = findViewById<Button>(R.id.btlotofacil)
         lotomania = findViewById<Button>(R.id.btlotomania)
+        btVoltar = findViewById<ImageButton>(R.id.voltar)
 
         megasena.setOnClickListener {
             val intent = Intent(this@MenuActivity, MegaSenaActivity::class.java)
             startActivity(intent)
-            finish()
         }
 
         quina.setOnClickListener {
             val intent = Intent(this@MenuActivity, QuinaActivity::class.java)
             startActivity(intent)
-            finish()
         }
 
         lotofacil.setOnClickListener {
             val intent = Intent(this@MenuActivity, LotoFacilActivity::class.java)
             startActivity(intent)
-            finish()
         }
 
         lotomania.setOnClickListener {
             val intent = Intent(this@MenuActivity, LotoManiaActivity::class.java)
             startActivity(intent)
-            finish()
+        }
+
+        btVoltar.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
         }
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())

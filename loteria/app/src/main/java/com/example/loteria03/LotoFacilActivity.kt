@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.TextView
@@ -17,6 +18,7 @@ class LotoFacilActivity : AppCompatActivity() {
     private lateinit var btLotoFacil: Button
     private lateinit var qtdJogos: EditText
     private lateinit var container: LinearLayout
+    private lateinit var btVoltar: ImageButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -25,6 +27,7 @@ class LotoFacilActivity : AppCompatActivity() {
         btLotoFacil = findViewById<Button>(R.id.btlotofacil)
         qtdJogos = findViewById<EditText>(R.id.qtdjogos)
         container = findViewById<LinearLayout>(R.id.linearcontainer)
+        btVoltar = findViewById<ImageButton>(R.id.voltar)
 
         val opcoes = (15..20).toList()
         val adapter = ArrayAdapter(
@@ -51,6 +54,9 @@ class LotoFacilActivity : AppCompatActivity() {
 
                 container.addView(textView)
             }
+        }
+        btVoltar.setOnClickListener {
+            finish()
         }
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())

@@ -29,7 +29,6 @@ class login_activity : AppCompatActivity() {
             if(valuser == "Arthur" && valsenha == "1234"){
                 val intent = Intent(this@login_activity, MenuActivity::class.java)
                 startActivity(intent)
-                finish()
             }else{
                 Toast.makeText(applicationContext, "Nome ou senha errados", Toast.LENGTH_SHORT).show()
             }
