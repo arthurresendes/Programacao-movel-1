@@ -15,6 +15,11 @@ class MenuActivity : AppCompatActivity() {
     private lateinit var lotomania: Button
     private lateinit var lotofacil: Button
     private lateinit var btVoltar: ImageButton
+
+    fun direcionar(page: Class<*>){
+        val intent = Intent(this@MenuActivity, page)
+        startActivity(intent)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -26,28 +31,25 @@ class MenuActivity : AppCompatActivity() {
         btVoltar = findViewById<ImageButton>(R.id.voltar)
 
         megasena.setOnClickListener {
-            val intent = Intent(this@MenuActivity, MegaSenaActivity::class.java)
-            startActivity(intent)
+            direcionar(MegaSenaActivity::class.java)
         }
 
         quina.setOnClickListener {
-            val intent = Intent(this@MenuActivity, QuinaActivity::class.java)
-            startActivity(intent)
+            direcionar(QuinaActivity::class.java)
         }
 
         lotofacil.setOnClickListener {
-            val intent = Intent(this@MenuActivity, LotoFacilActivity::class.java)
-            startActivity(intent)
+            direcionar(LotoFacilActivity::class.java)
         }
 
         lotomania.setOnClickListener {
-            val intent = Intent(this@MenuActivity, LotoManiaActivity::class.java)
-            startActivity(intent)
+            direcionar(LotoManiaActivity::class.java)
         }
 
         btVoltar.setOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
+            voltarSimples()
         }
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)

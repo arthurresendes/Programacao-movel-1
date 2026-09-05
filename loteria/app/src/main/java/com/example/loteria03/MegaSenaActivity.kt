@@ -57,7 +57,7 @@ class MegaSenaActivity : AppCompatActivity() {
         }
 
         btVoltar.setOnClickListener {
-            finish()
+            voltarSimples()
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
