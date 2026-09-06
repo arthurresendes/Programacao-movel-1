@@ -14,12 +14,8 @@ class MenuActivity : AppCompatActivity() {
     private lateinit var quina: Button
     private lateinit var lotomania: Button
     private lateinit var lotofacil: Button
+    private lateinit var btSair: Button
     private lateinit var btVoltar: ImageButton
-
-    fun direcionar(page: Class<*>){
-        val intent = Intent(this@MenuActivity, page)
-        startActivity(intent)
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -29,25 +25,30 @@ class MenuActivity : AppCompatActivity() {
         lotofacil = findViewById<Button>(R.id.btlotofacil)
         lotomania = findViewById<Button>(R.id.btlotomania)
         btVoltar = findViewById<ImageButton>(R.id.voltar)
+        btSair = findViewById<Button>(R.id.btSairMenu)
 
         megasena.setOnClickListener {
-            direcionar(MegaSenaActivity::class.java)
+            direcionar(this@MenuActivity, MegaSenaActivity::class.java)
         }
 
         quina.setOnClickListener {
-            direcionar(QuinaActivity::class.java)
+            direcionar(this@MenuActivity,QuinaActivity::class.java)
         }
 
         lotofacil.setOnClickListener {
-            direcionar(LotoFacilActivity::class.java)
+            direcionar(this@MenuActivity,LotoFacilActivity::class.java)
         }
 
         lotomania.setOnClickListener {
-            direcionar(LotoManiaActivity::class.java)
+            direcionar(this@MenuActivity,LotoManiaActivity::class.java)
         }
 
         btVoltar.setOnClickListener {
             voltarSimples()
+        }
+
+        btSair.setOnClickListener {
+            sairApp()
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

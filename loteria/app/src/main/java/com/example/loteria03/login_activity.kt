@@ -14,6 +14,7 @@ class login_activity : AppCompatActivity() {
     private lateinit var user: EditText
     private lateinit var senha: EditText
     private lateinit var entrar: Button
+    private lateinit var btSair: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -21,18 +22,23 @@ class login_activity : AppCompatActivity() {
         user = findViewById<EditText>(R.id.userText)
         senha = findViewById<EditText>(R.id.userSenha)
         entrar = findViewById<Button>(R.id.btEntrar)
+        btSair = findViewById<Button>(R.id.btSairLog)
 
         entrar.setOnClickListener {
             val valuser = user.text.toString()
             val valsenha = senha.text.toString()
 
             if(valuser == "Arthur" && valsenha == "1234"){
-                val intent = Intent(this@login_activity, MenuActivity::class.java)
-                startActivity(intent)
+                direcionar(this@login_activity, MenuActivity::class.java)
             }else{
                 Toast.makeText(applicationContext, "Nome ou senha errados", Toast.LENGTH_SHORT).show()
             }
         }
+
+        btSair.setOnClickListener {
+            sairApp()
+        }
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)

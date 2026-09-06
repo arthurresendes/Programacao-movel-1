@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">loteria03</string>
+
+    <string name="login_usuario">Usuário</string>
+    <string name="login_senha">Senha</string>
+    <string name="login_resposta_usuario">Digite seu nome</string>
+    <string name="login_resposta_senha">Digite sua senha</string>
+    <string name="bt_entrar">Entrar</string>
+
+    <string name="mega_sena">Mega-Sena</string>
+    <string name="quina">Quina</string>
+    <string name="lotomania">Lotomania</string>
+    <string name="lotofacil">Lotofácil</string>
+
+    <string name="vao_para_jogo">Quantos números vão para o jogo?</string>
+    <string name="quantos_jogos">Quantos jogos ?</string>
+    <string name="numero_jogos">Número de jogos</string>
+    <string name="fazer_jogos">Fazer jogos</string>
+    <string name="voltar">Voltar</string>
+    <string name="result_num_jogos">Resultado número de jogos</string>
+    <string name="logo_loteria">Logo loteria</string>
+    <string name="btSair">Sair</string>
 </resources>

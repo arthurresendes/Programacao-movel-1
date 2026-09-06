@@ -13,11 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="106dp"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="106dp"
-        android:text="Lotomania"
+        android:text="@string/lotomania"
         android:textSize="40sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,10 +24,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="283dp"
-        android:text="Quantos jogos ?"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="32dp"
+        android:text="@string/quantos_jogos"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -39,11 +35,9 @@
         android:layout_height="48dp"
         android:layout_marginStart="28dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="173dp"
         android:ems="10"
-        android:hint="Número de jogos"
+        android:hint="@string/numero_jogos"
         android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -54,25 +48,31 @@
         android:layout_marginStart="144dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="145dp"
-        android:text="Fazer jogos"
+        android:text="@string/fazer_jogos"
         app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/qtdjogos" />
 
-    <LinearLayout
-        android:id="@+id/linearcontainer"
-        android:layout_width="409dp"
-        android:layout_height="480dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:orientation="vertical"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp"
+    <ScrollView
+        android:id="@+id/scrollResultados"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/result_num_jogos"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btlotomaniajogo"></LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/btlotomaniajogo">
+        <LinearLayout
+            android:id="@+id/linearcontainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp" />
+    </ScrollView>
 
     <ImageButton
         android:id="@+id/voltar"
@@ -81,8 +81,7 @@
         android:layout_marginStart="6dp"
         android:layout_marginTop="24dp"
         android:background="@android:color/transparent"
-        android:contentDescription="Voltar"
-        app:layout_constraintEnd_toStartOf="@+id/imageView3"
+        android:contentDescription="@string/voltar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/arrow" />
