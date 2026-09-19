@@ -1,129 +1,57 @@
-# Programação Móvel 1 📱
+# Programação Móvel 1
 
-Repositório da disciplina **Programação Móvel 1** contendo projetos de desenvolvimento de aplicativos Android com **Kotlin**.
+Repositório com projetos e exercícios de programação mobile em Kotlin.
 
-## 📋 Conteúdo do Repositório
+Este repositório reúne vários projetos Android separados em pastas, além de scripts em Kotlin para lógica e exercícios práticos.
 
-Este repositório é organizado em múltiplos diretórios, cada um contendo diferentes tipos de projetos e exemplos de código:
+## Estrutura do repositório
 
-### 1. **IMC** 📏
-Aplicação Android que calcula o Índice de Massa Corporal (IMC) de um usuário.
+- `App_Varias_Telas.zip` — arquivo compactado com um aplicativo de múltiplas telas.
+- `IMC/` — projeto Android com estrutura Gradle.
+- `Kotlin/` — arquivos de lógica em Kotlin.
+- `eleicao/` — projeto Android com estrutura Gradle.
+- `loteria/` — projeto Android com estrutura Gradle.
+- `media/` — projeto Android com estrutura Gradle.
+- `mobile-dsm/` — projeto Android com estrutura Gradle.
+- `multiplas_telas_aula/` — projeto Android com estrutura Gradle.
 
-**Tecnologias:**
-- Android Studio
-- Kotlin
+## Projetos Android
 
-**Funcionalidades:**
-- Interface para entrada de peso e altura
-- Cálculo automático do IMC
-- Classificação do resultado (baixo peso, normal, sobrepeso, obesidade)
+Várias pastas do repositório seguem a estrutura típica de projetos Android em Kotlin/Gradle, com arquivos como:
 
----
+- `build.gradle.kts`
+- `settings.gradle.kts`
+- `gradlew`
+- `gradlew.bat`
+- `gradle.properties`
+- diretório `app/`
+- diretório `src/`
 
-### 2. **Kotlin - Lógica** 🧮
-Pasta contendo scripts Kotlin puro (.kts) com exercícios de lógica de programação.
+Esses projetos aparecem como exemplos e atividades de desenvolvimento mobile, organizados em pastas distintas.
 
-**Arquivos inclusos:**
+## Pasta `Kotlin/Logica`
 
-| Arquivo | Descrição |
-|---------|-----------|
-| `area.kts` | Cálculo de área de formas geométricas |
-| `imc.kts` | Lógica de cálculo de IMC em Kotlin puro |
-| `media-nota.kts` | Cálculo de média de notas |
-| `media-outra-materia.kts` | Cálculo de média de diferentes disciplinas |
-| `multiplicacao.kts` | Operações de multiplicação |
-| `tabuada.kts` | Geração de tabuada |
+A pasta `Kotlin/Logica` contém scripts Kotlin com exercícios de lógica e cálculos simples. Os arquivos presentes são:
 
-**Conceitos Aplicados:**
-- Variáveis e tipos de dados
-- Operações matemáticas
-- Funções e retorno de valores
-- Estruturas condicionais
-- Loops e iterações
+- `area.kts`
+- `imc.kts`
+- `media-nota.kts`
+- `media-outra-materia.kts`
+- `multiplicacao.kts`
+- `tabuada.kts`
 
----
+Esses arquivos demonstram operações matemáticas, cálculo de médias, multiplicação e tabuada em Kotlin.
 
-### 3. **Loteria** 🎰
-Aplicativo Android que simula um jogo de loteria.
+## Observações
 
-**Tecnologias:**
-- Android Studio
-- Kotlin
-- Gradle
+- O repositório é majoritariamente composto por Kotlin.
+- Há múltiplos projetos Android em pastas separadas.
+- A organização do repositório sugere exercícios e práticas de disciplina de programação mobile, com foco em aprendizado prático.
 
-**Funcionalidades Esperadas:**
-- Geração de números aleatórios
-- Validação de apostas
-- Interface amigável ao usuário
+## Como usar
 
----
+Para os projetos Android, normalmente basta abrir a pasta correspondente no Android Studio e executar com o Gradle do projeto. Para os scripts Kotlin, é necessário ter o ambiente Kotlin disponível no computador.
 
-### 4. **Mobile-DSM** 📱
-Projeto Android mais completo, provavelmente com múltiplas funcionalidades.
+## Licença
 
-**Tecnologias:**
-- Android Studio
-- Kotlin
-
-**Características:**
-- Múltiplas telas e funcionalidades
-
----
-
-### 5. **Múltiplas Telas Aula** 🖥️
-Aplicativo educacional que demonstra navegação entre múltiplas telas.
-
-**Tecnologias:**
-- Android Studio
-- Kotlin
-
-**Conceitos Aplicados:**
-- Activity e Fragment
-- Navegação entre telas
-- Passagem de dados entre activities
-- Ciclo de vida de componentes Android
-
----
-
-### 6. **App Varias Telas** 📦
-Arquivo compactado contendo um aplicativo com múltiplas telas.
-
----
-
-## 🎯 Conteúdos Aplicados
-
-### Linguagem
-- **Kotlin**: Linguagem moderna, segura e concisa para desenvolvimento Android
-  - Sintaxe clara e legível
-  - Segurança em relação a null pointers
-  - Interoperabilidade com Java
-
----
-
-## 🚀 Como Usar
-
-### Pré-requisitos
-- Android Studio instalado
-- JDK 11+ configurado
-- Emulador ou dispositivo Android para testes
-
----
-
-## 🎓 Objetivos de Aprendizado
-
-Este repositório abrange:
-
-✅ Fundamentos de Kotlin  
-✅ Desenvolvimento de aplicativos Android  
-✅ Criação de interfaces de usuário  
-✅ Navegação e fluxo de dados  
-✅ Boas práticas de programação mobile  
-✅ Lógica de programação aplicada  
-
----
-
-## 📝 Licença
-
-Este repositório é para fins educacionais.
-
-**Última atualização:** Setembro de 2026
+Este repositório foi produzido para fins de estudo e prática acadêmica.
