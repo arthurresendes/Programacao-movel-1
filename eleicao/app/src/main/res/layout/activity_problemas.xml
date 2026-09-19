@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/saude"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="62dp"
@@ -34,7 +34,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <CheckBox
-        android:id="@+id/checkBox2"
+        android:id="@+id/violenciaSegurançaPublica"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="62dp"
@@ -42,10 +42,10 @@
         android:text="Violência e Segurança Pública"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        app:layout_constraintTop_toBottomOf="@+id/saude" />
 
     <CheckBox
-        android:id="@+id/checkBox3"
+        android:id="@+id/economiaInflacao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="62dp"
@@ -53,10 +53,10 @@
         android:text="Economia e Inflação"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
+        app:layout_constraintTop_toBottomOf="@+id/violenciaSegurançaPublica" />
 
     <CheckBox
-        android:id="@+id/checkBox4"
+        android:id="@+id/educacao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="62dp"
@@ -64,10 +64,10 @@
         android:text="Educação"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox3" />
+        app:layout_constraintTop_toBottomOf="@+id/economiaInflacao" />
 
     <CheckBox
-        android:id="@+id/checkBox5"
+        android:id="@+id/corrupcao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="62dp"
@@ -75,10 +75,10 @@
         android:text="Corrupção"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox4" />
+        app:layout_constraintTop_toBottomOf="@+id/educacao" />
 
     <CheckBox
-        android:id="@+id/checkBox6"
+        android:id="@+id/desemprego"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="62dp"
@@ -86,10 +86,10 @@
         android:text="Desemprego"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox5" />
+        app:layout_constraintTop_toBottomOf="@+id/corrupcao" />
 
     <CheckBox
-        android:id="@+id/checkBox7"
+        android:id="@+id/fomePobreza"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="62dp"
@@ -97,21 +97,21 @@
         android:text="Fome e Pobreza"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox6" />
+        app:layout_constraintTop_toBottomOf="@+id/desemprego" />
 
     <CheckBox
-        android:id="@+id/checkBox8"
+        android:id="@+id/desiquidadeSocial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="62dp"
         android:layout_marginEnd="182dp"
-        android:text="Desigualdade Social "
+        android:text="Desigualdade Social"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox7" />
+        app:layout_constraintTop_toBottomOf="@+id/fomePobreza" />
 
     <CheckBox
-        android:id="@+id/checkBox9"
+        android:id="@+id/maAdmin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="62dp"
@@ -119,10 +119,10 @@
         android:text="Má Administração"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox8" />
+        app:layout_constraintTop_toBottomOf="@+id/desiquidadeSocial" />
 
     <CheckBox
-        android:id="@+id/checkBox10"
+        android:id="@+id/salario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="62dp"
@@ -130,7 +130,7 @@
         android:text="Salário"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox9" />
+        app:layout_constraintTop_toBottomOf="@+id/maAdmin" />
 
     <Button
         android:id="@+id/btConfirmar"
@@ -145,5 +145,5 @@
         app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox10" />
+        app:layout_constraintTop_toBottomOf="@+id/salario" />
 </androidx.constraintlayout.widget.ConstraintLayout>

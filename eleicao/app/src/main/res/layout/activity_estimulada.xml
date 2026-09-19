@@ -21,65 +21,65 @@
         app:layout_constraintVertical_bias="0.497">
 
         <RadioButton
-            android:id="@+id/radioOpcao1"
+            android:id="@+id/butcher"
             android:layout_width="384dp"
             android:layout_height="60dp"
             android:background="#F6CFCF"
-            android:text="Opção 1"
+            android:text="Butcher"
             android:drawableStart="@drawable/ic_launcher_background"
             android:drawablePadding="12dp"/>
 
         <RadioButton
-            android:id="@+id/radioOpcao2"
+            android:id="@+id/homelander"
             android:layout_width="384dp"
             android:layout_height="60dp"
             android:background="#C0F0F8"
-            android:text="Opção 2"
+            android:text="Homelander"
             android:drawableStart="@drawable/ic_launcher_background"
             android:drawablePadding="12dp"/>
 
         <RadioButton
-            android:id="@+id/radioOpcao3"
+            android:id="@+id/deep"
             android:layout_width="384dp"
             android:layout_height="60dp"
             android:background="#E8BBFB"
-            android:text="Opção 3"
+            android:text="Deep"
             android:drawableStart="@drawable/ic_launcher_background"
             android:drawablePadding="12dp"/>
 
         <RadioButton
-            android:id="@+id/radioOpcao4"
+            android:id="@+id/hughie"
             android:layout_width="384dp"
             android:layout_height="60dp"
             android:background="#EFFBB4"
-            android:text="Opção 4"
+            android:text="Hughie"
             android:drawableStart="@drawable/ic_launcher_background"
             android:drawablePadding="12dp"/>
 
         <RadioButton
-            android:id="@+id/radioOpcao5"
+            android:id="@+id/soldierBoy"
             android:layout_width="384dp"
             android:layout_height="60dp"
             android:background="#CCFBC5"
-            android:text="Opção 5"
+            android:text="Soldier Boy"
             android:drawableStart="@drawable/ic_launcher_background"
             android:drawablePadding="12dp"/>
 
         <RadioButton
-            android:id="@+id/radioOpcao6"
+            android:id="@+id/branco"
             android:layout_width="384dp"
             android:layout_height="60dp"
             android:text="Branco" />
 
         <RadioButton
-            android:id="@+id/radioOpcao7"
+            android:id="@+id/nulo"
             android:layout_width="384dp"
             android:layout_height="60dp"
             android:background="#C7C7C7"
             android:text="Nulo" />
 
         <RadioButton
-            android:id="@+id/radioOpcao8"
+            android:id="@+id/naoSei"
             android:layout_width="384dp"
             android:layout_height="60dp"
             android:background="#D7DBFD"
