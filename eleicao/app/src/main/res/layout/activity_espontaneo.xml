@@ -68,14 +68,14 @@
 
     <Button
         android:id="@+id/btConfirmar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="248dp"
+        android:layout_height="65dp"
         android:layout_marginStart="145dp"
         android:layout_marginTop="117dp"
         android:layout_marginEnd="145dp"
         android:backgroundTint="#2D3094"
         android:text="Confirmar"
-        android:textSize="16sp"
+        android:textSize="24sp"
         app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

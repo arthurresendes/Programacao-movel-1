@@ -21,7 +21,7 @@ class EspontaneoActivity : AppCompatActivity() {
         btConfirmar = findViewById<Button>(R.id.btConfirmar)
 
         btConfirmar.setOnClickListener {
-            val candidato = etCandidato.toString().trim()
+            val candidato = etCandidato.text.toString().trim()
             if(candidato.isNotEmpty()){
                 val intent = Intent(this@EspontaneoActivity, EstimuladaActivity::class.java).apply {
                     putExtra("Espontaneo", candidato)

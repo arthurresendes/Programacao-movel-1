@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
         lifecycleScope.launch {
-            delay(2000)
+            delay(3000)
             direcionando(this@MainActivity, LoginActivity::class.java)
         }
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

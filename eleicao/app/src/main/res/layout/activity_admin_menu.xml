@@ -8,25 +8,25 @@
     tools:context=".AdminMenuActivity">
 
     <TextView
-    android:id="@+id/textView3"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="62dp"
-    android:layout_marginTop="59dp"
-    android:layout_marginEnd="63dp"
-    android:text="Resultado da Pesquisa"
-    android:textSize="28sp"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="62dp"
+        android:layout_marginTop="59dp"
+        android:layout_marginEnd="63dp"
+        android:text="Resultado da Pesquisa"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="71dp"
-        android:layout_marginTop="26dp"
-        android:layout_marginEnd="71dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="50dp"
         android:text="Quant. de pessoas entrevistadas: "
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,14 +35,14 @@
 
     <Button
         android:id="@+id/btEleitoresMenu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="248dp"
+        android:layout_height="65dp"
         android:layout_marginStart="153dp"
-        android:layout_marginTop="81dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="154dp"
         android:backgroundTint="#334295"
         android:text="Eleitores"
-        android:textSize="16sp"
+        android:textSize="24sp"
         app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,14 +50,14 @@
 
     <Button
         android:id="@+id/btResultadosMenu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="145dp"
-        android:layout_marginTop="65dp"
-        android:layout_marginEnd="146dp"
+        android:layout_width="248dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="153dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="154dp"
         android:backgroundTint="#334295"
         android:text="Resultados"
-        android:textSize="16sp"
+        android:textSize="24sp"
         app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,17 +65,31 @@
 
     <Button
         android:id="@+id/btLimparDados"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="138dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="138dp"
+        android:layout_width="248dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="153dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="154dp"
         android:backgroundTint="#334295"
         android:text="Limpar dados"
-        android:textSize="16sp"
+        android:textSize="24sp"
         app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btResultadosMenu" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="72dp"
+        android:text="_"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
