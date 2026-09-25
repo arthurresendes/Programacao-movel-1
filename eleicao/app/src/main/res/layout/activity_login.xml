@@ -13,7 +13,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="100dp"
         android:background="@drawable/edittext_borda"
-        android:hint="Usuário"
+        android:hint="@string/user"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -24,7 +24,7 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="1dp"
         android:background="@drawable/edittext_borda"
-        android:hint="Senha"
+        android:hint="@string/sen"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -32,10 +32,10 @@
         android:id="@+id/acessar"
         android:layout_width="0dp"
         android:layout_height="65dp"
-        android:layout_marginStart="80dp"
+        android:layout_marginStart="64dp"
         android:layout_marginTop="40dp"
         android:backgroundTint="#2B527E"
-        android:text="Acessar"
+        android:text="@string/btAcessar"
         android:textSize="20sp"
         app:cornerRadius="10dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,12 +43,12 @@
 
     <Button
         android:id="@+id/finalizar"
-        android:layout_width="0dp"
+        android:layout_width="119dp"
         android:layout_height="65dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="40dp"
         android:backgroundTint="#2D5685"
-        android:text="Finalizar"
+        android:text="@string/btSair"
         android:textSize="20sp"
         app:cornerRadius="10dp"
         app:layout_constraintStart_toEndOf="@+id/acessar"
@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
         android:layout_marginTop="31dp"
-        android:text="Senha"
+        android:text="@string/sen"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -71,7 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:text="Usuário"
+        android:text="@string/user"
         android:textColorLink="#3D498A"
         android:textSize="24sp"
         android:textStyle="bold"

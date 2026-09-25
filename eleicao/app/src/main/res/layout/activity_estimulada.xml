@@ -9,8 +9,6 @@
     android:layout_height="match_parent"
     tools:context=".EstimuladaActivity">
 
-    <!-- MEW -->
-
     <LinearLayout
         android:id="@+id/candidatoMew"
         android:layout_width="410dp"
@@ -24,7 +22,7 @@
         <ImageView
             android:layout_width="80dp"
             android:layout_height="65dp"
-            android:contentDescription="Mew"
+            android:contentDescription="@string/mew"
             android:scaleType="centerCrop"
             android:src="@drawable/mew" />
 
@@ -32,15 +30,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="Mew"
+            android:text="@string/mew"
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold" />
 
     </LinearLayout>
-
-
-    <!-- PIKACHU -->
 
     <LinearLayout
         android:id="@+id/candidatoPikachu"
@@ -56,7 +51,7 @@
         <ImageView
             android:layout_width="80dp"
             android:layout_height="65dp"
-            android:contentDescription="Pikachu"
+            android:contentDescription="@string/pikachu"
             android:scaleType="centerCrop"
             android:src="@drawable/bonechu" />
 
@@ -64,15 +59,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="pikachu"
+            android:text="@string/pikachu"
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold" />
 
     </LinearLayout>
-
-
-    <!-- SQUIRTLE -->
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardCandidatoUm"
@@ -98,7 +90,7 @@
             <ImageView
                 android:layout_width="80dp"
                 android:layout_height="65dp"
-                android:contentDescription="Squirtle"
+                android:contentDescription="@string/squirtle"
                 android:scaleType="centerCrop"
                 android:src="@drawable/squirtle" />
 
@@ -106,7 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="Squirtle"
+                android:text="@string/squirtle"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -114,12 +106,6 @@
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
-
-
-    <!-- CHARMANDER -->
-
-
-    <!-- BULBASSAURO -->
 
     <LinearLayout
         android:id="@+id/candidatoCharmander"
@@ -135,7 +121,7 @@
         <ImageView
             android:layout_width="80dp"
             android:layout_height="65dp"
-            android:contentDescription="Charmander"
+            android:contentDescription="@string/charmander"
             android:scaleType="centerCrop"
             android:src="@drawable/charmander" />
 
@@ -143,7 +129,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="Charmander"
+            android:text="@string/charmander"
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -164,7 +150,7 @@
         <ImageView
             android:layout_width="80dp"
             android:layout_height="65dp"
-            android:contentDescription="Bulbassauro"
+            android:contentDescription="@string/bulbassauro"
             android:scaleType="centerCrop"
             android:src="@drawable/bulbassauro" />
 
@@ -172,15 +158,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="Bulbassauro"
+            android:text="@string/bulbassauro"
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold" />
 
     </LinearLayout>
-
-
-    <!-- BRANCO / NULO / NÃO SEI -->
 
     <RadioGroup
         android:id="@+id/radioGroupOpcoes"
@@ -195,24 +178,21 @@
             android:id="@+id/radioButton4"
             android:layout_width="match_parent"
             android:layout_height="33dp"
-            android:text="Branco" />
+            android:text="@string/branco" />
 
         <RadioButton
             android:id="@+id/radioButton5"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:text="Nulo" />
+            android:text="@string/nulo" />
 
         <RadioButton
             android:id="@+id/radioButton6"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:text="Não sei" />
+            android:text="@string/naoSei" />
 
     </RadioGroup>
-
-
-    <!-- BOTÃO CONFIRMAR -->
 
     <Button
         android:id="@+id/btConfirmarEstimulada"
@@ -220,8 +200,9 @@
         android:layout_height="65dp"
         android:layout_marginStart="123dp"
         android:backgroundTint="#2D3094"
-        android:text="Confirmar"
+        android:text="@string/confirmar"
         android:textColor="#FFFFFF"
+        android:textSize="20sp"
         app:cornerRadius="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroupOpcoes" />

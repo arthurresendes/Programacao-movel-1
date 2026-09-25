@@ -14,7 +14,7 @@
         android:layout_marginStart="62dp"
         android:layout_marginTop="88dp"
         android:layout_marginEnd="61dp"
-        android:text="Dados do Entrevistado"
+        android:text="@string/dadosEntrevistados"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,7 +28,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="104dp"
         android:background="@drawable/edittext_borda"
-        android:hint="Seu nome"
+        android:hint="@string/seuNome"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
@@ -38,7 +38,7 @@
         android:layout_height="51dp"
         android:layout_marginStart="104dp"
         android:background="@drawable/edittext_borda"
-        android:hint="Digite o telefone"
+        android:hint="@string/digiteTelefone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
@@ -46,13 +46,10 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="101dp"
+        android:layout_marginStart="104dp"
         android:layout_marginTop="76dp"
-        android:layout_marginEnd="262dp"
-        android:text="Nome"
+        android:text="@string/nome"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -60,25 +57,22 @@
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="101dp"
+        android:layout_marginStart="104dp"
         android:layout_marginTop="36dp"
-        android:layout_marginEnd="262dp"
-        android:text="Telefone"
+        android:text="@string/telefone"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_nome" />
 
     <Button
         android:id="@+id/btFinalizar"
-        android:layout_width="165sp"
+        android:layout_width="248sp"
         android:layout_height="65sp"
-        android:layout_marginStart="120dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="60dp"
         android:backgroundTint="#2D9443"
-        android:text="Finalizar"
-        android:textSize="16sp"
+        android:text="@string/btFinalizar"
+        android:textSize="24sp"
         app:cornerRadius="10sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_numero" />

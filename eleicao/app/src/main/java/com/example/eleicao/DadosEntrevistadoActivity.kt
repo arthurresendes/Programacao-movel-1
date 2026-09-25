@@ -70,19 +70,40 @@ class DadosEntrevistadoActivity : AppCompatActivity() {
         }
     }
 
-    private fun finalizar() {
+    private fun isTelefoneValido(telefone: String): Boolean {
+        val apenasNumeros = telefone.replace(Regex("\\D"), "")
+        if (apenasNumeros.length !in 10..11) {
+            return false
+        }
+        if (apenasNumeros.all { it == apenasNumeros[0] }) {
+            return false
+        }
 
+        if (apenasNumeros.length == 11 && apenasNumeros[2] != '9') {
+            return false
+        }
+
+        return true
+    }
+
+
+    private fun finalizar() {
         val nome = etNome.text.toString().trim()
         val telefone = etTelefone.text.toString().trim()
-
         if (nome.isEmpty() || telefone.isEmpty()) {
-
             Toast.makeText(
                 this,
                 "Preencha o nome e o telefone.",
                 Toast.LENGTH_SHORT
             ).show()
-
+            return
+        }
+        if (!isTelefoneValido((telefone))) {
+            Toast.makeText(
+                this,
+                "Preencha o telefone corretamente.",
+                Toast.LENGTH_SHORT
+            ).show()
             return
         }
 
@@ -319,6 +340,7 @@ class DadosEntrevistadoActivity : AppCompatActivity() {
                 ).show()
 
                 PesquisaAtual.limpar()
+                direcionando(this@DadosEntrevistadoActivity, EspontaneoActivity::class.java)
 
             } catch (e: Exception) {
 

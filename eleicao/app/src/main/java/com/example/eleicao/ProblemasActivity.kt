@@ -39,50 +39,38 @@ class ProblemasActivity : AppCompatActivity() {
 
         btConfirmar.setOnClickListener {
 
-                    val algumSelecionado =
-                        cbSaude.isChecked ||
-                                cbViolencia.isChecked ||
-                                cbEconomia.isChecked ||
-                                cbEducacao.isChecked ||
-                                cbCorrupcao.isChecked ||
-                                cbDesemprego.isChecked ||
-                                cbFome.isChecked ||
-                                cbDesigualdade.isChecked ||
-                                cbAdministracao.isChecked ||
-                                cbSalario.isChecked
+            val problemasSelecionados = mutableListOf<String>()
 
-                    if (algumSelecionado) {
+            if (cbSaude.isChecked) problemasSelecionados.add("Saúde")
+            if (cbViolencia.isChecked) problemasSelecionados.add("Violência e Segurança Pública")
+            if (cbEconomia.isChecked) problemasSelecionados.add("Economia e Inflação")
+            if (cbEducacao.isChecked) problemasSelecionados.add("Educação")
+            if (cbCorrupcao.isChecked) problemasSelecionados.add("Corrupção")
+            if (cbDesemprego.isChecked) problemasSelecionados.add("Desemprego")
+            if (cbFome.isChecked) problemasSelecionados.add("Fome e Pobreza")
+            if (cbDesigualdade.isChecked) problemasSelecionados.add("Desigualdade Social")
+            if (cbAdministracao.isChecked) problemasSelecionados.add("Má Administração")
+            if (cbSalario.isChecked) problemasSelecionados.add("Salário")
 
-                        val problemasSelecionados = mutableListOf<String>()
+            if (problemasSelecionados.size == 3) {
 
-                        if (cbSaude.isChecked) problemasSelecionados.add("Saúde")
-                        if (cbViolencia.isChecked) problemasSelecionados.add("Violência e Segurança Pública")
-                        if (cbEconomia.isChecked) problemasSelecionados.add("Economia e Inflação")
-                        if (cbEducacao.isChecked) problemasSelecionados.add("Educação")
-                        if (cbCorrupcao.isChecked) problemasSelecionados.add("Corrupção")
-                        if (cbDesemprego.isChecked) problemasSelecionados.add("Desemprego")
-                        if (cbFome.isChecked) problemasSelecionados.add("Fome e Pobreza")
-                        if (cbDesigualdade.isChecked) problemasSelecionados.add("Desigualdade Social")
-                        if (cbAdministracao.isChecked) problemasSelecionados.add("Má Administração")
-                        if (cbSalario.isChecked) problemasSelecionados.add("Salário")
+                PesquisaAtual.problemas = problemasSelecionados.joinToString(", ")
 
-                        PesquisaAtual.problemas = problemasSelecionados.joinToString(", ")
+                val intent = Intent(
+                    this@ProblemasActivity,
+                    DadosEntrevistadoActivity::class.java
+                )
 
-                        val intent = Intent(
-                            this@ProblemasActivity,
-                            DadosEntrevistadoActivity::class.java
-                        )
+                startActivity(intent)
 
-                        startActivity(intent)
+            } else {
 
-                    } else {
-
-                        Toast.makeText(
-                            this,
-                            "Selecione pelo menos um problema.",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
+                Toast.makeText(
+                    this,
+                    "Selecione exatamente 3 problemas (você selecionou ${problemasSelecionados.size}).",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 }

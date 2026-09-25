@@ -3,6 +3,7 @@ package com.example.eleicao
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -19,22 +20,28 @@ import java.util.Date
 import java.util.Locale
 
 class EleitoresActivity : AppCompatActivity() {
-
     private lateinit var containerPesquisas: LinearLayout
+    private lateinit var voltar: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_eleitores)
         containerPesquisas = findViewById(R.id.container_pesquisas)
+        voltar = findViewById<ImageButton>(R.id.voltar)
+        voltarPage()
         carregarPesquisas()
     }
 
-    // Chama de novo toda vez que a tela volta a ficar visível,
-    // assim a lista sempre aparece atualizada com os novos entrevistados
     override fun onResume() {
         super.onResume()
         carregarPesquisas()
+    }
+
+    private fun voltarPage(){
+        voltar.setOnClickListener {
+            voltando()
+        }
     }
 
     private fun carregarPesquisas() {
@@ -49,7 +56,6 @@ class EleitoresActivity : AppCompatActivity() {
 
     private fun exibirPesquisas(pesquisas: List<EntrevistadoComLocalizacao>) {
         containerPesquisas.removeAllViews()
-
         if (pesquisas.isEmpty()) {
             val texto = TextView(this)
             texto.text = "Nenhuma pesquisa encontrada."
@@ -58,6 +64,7 @@ class EleitoresActivity : AppCompatActivity() {
             containerPesquisas.addView(texto)
             return
         }
+
 
         val formato = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale("pt", "BR"))
 

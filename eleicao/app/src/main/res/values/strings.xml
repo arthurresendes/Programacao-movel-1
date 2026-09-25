@@ -1,3 +1,57 @@
 <resources>
     <string name="app_name">eleicao</string>
+    <string name="voltar">Voltar</string>
+    <string name="barra">Barra de rolagem</string>
+    <string name="confirmar">Confirmar</string>
+    
+    <string name="resultsPesquisa">Resultado da Pesquisa</string>
+    <string name="btEleitores">Eleitores</string>
+    <string name="btResults">Resultados</string>
+    <string name="btLimpar">Limpar dados</string>
+    
+    <string name="dadosEntrevistados">Dados do Entrevistado</string>
+    <string name="nome">Nome</string>
+    <string name="telefone">Telefone</string>
+    <string name="seuNome">Seu nome</string>
+    <string name="digiteTelefone">Digite o telefone</string>
+    <string name="btFinalizar">Finalizar</string>
+    
+    <string name="entrevistados">Entrevistados</string>
+    
+    <string name="eleicoes2026">ELEIÇÕES 2026</string>
+    <string name="pesquisaIntencao">PESQUISA DE INTENÇÃO</string>
+    <string name="pesquisaEspontanea">Pesquisa Espontânea</string>
+    <string name="nomeCandidato">Nome do seu candidato</string>
+    
+    <string name="mew">Mew</string>
+    <string name="pikachu">Pikachu</string>
+    <string name="squirtle">Squirtle</string>
+    <string name="charmander">Charmander</string>
+    <string name="bulbassauro">Bulbassauro</string>
+    <string name="branco">Branco</string>
+    <string name="nulo">Nulo</string>
+    <string name="naoSei">Não sei</string>
+    
+    <string name="user">Usuário</string>
+    <string name="sen">Senha</string>
+    <string name="btAcessar">Acessar</string>
+    <string name="btSair">Sair</string>
+    
+    <string name="principaisProblemas">Principais Problemas</string>
+    <string name="saude">Saúde</string>
+    <string name="viole">Violência e Segurança Pública</string>
+    <string name="eco">Economia e Inflação</string>
+    <string name="salario">Salário</string>
+    <string name="maadm">Má Administração</string>
+    <string name="desiso">Desigualdade Social</string>
+    <string name="fome">Fome e Pobreza</string>
+    <string name="desemp">Desemprego</string>
+    <string name="corru">Corrupção</string>
+    <string name="edu">Educação</string>
+
+    <string name="qtdPessoa">Quant. de pessoas entrevistadas: </string>
+    <string name="top5">Voto espontâneo — Top 5</string>
+    <string name="vestimulado">Voto estimulado</string>
+    <string name="temasI">Temas mais importantes</string>
+    
 </resources>

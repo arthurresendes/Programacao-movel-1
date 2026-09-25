@@ -2,6 +2,9 @@ package com.example.eleicao
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
+import android.util.Log.v
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -17,12 +20,15 @@ import com.github.mikephil.charting.utils.ColorTemplate
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 
 class ResultadoActivity : AppCompatActivity() {
 
     private lateinit var chartEspontaneo: BarChart
     private lateinit var chartEstimulado: PieChart
     private lateinit var chartTemas: BarChart
+    private lateinit var voltar: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,8 +38,22 @@ class ResultadoActivity : AppCompatActivity() {
         chartEspontaneo = findViewById(R.id.chart_espontaneo)
         chartEstimulado = findViewById(R.id.chart_estimulado)
         chartTemas = findViewById(R.id.chart_temas)
+        voltar = findViewById<ImageButton>(R.id.voltar)
 
         carregarResultado()
+        voltarPage()
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+    }
+
+    private fun voltarPage(){
+        voltar.setOnClickListener {
+            voltando()
+        }
     }
 
     private fun carregarResultado() {
@@ -46,20 +66,16 @@ class ResultadoActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.textView).text =
                 "Quant. de pessoas entrevistadas: $total"
 
-            // 1) Espontâneo - top 5 - barras
             val top5 = withContext(Dispatchers.IO) {
                 banco.respostaDao().top5Espontaneos()
             }
             montarBarras(chartEspontaneo, top5)
 
-            // 2) Estimulado - pizza
             val votos = withContext(Dispatchers.IO) {
                 banco.respostaDao().contagemPorVoto()
             }
             montarPizza(chartEstimulado, votos)
 
-            // 3) Temas - vem como texto separado por vírgula, então
-            // conto manualmente quantas vezes cada tema aparece
             val problemasCrus = withContext(Dispatchers.IO) {
                 banco.respostaDao().listarTodosProblemas()
             }
@@ -68,8 +84,6 @@ class ResultadoActivity : AppCompatActivity() {
         }
     }
 
-    // Junta todas as strings "Saúde, Educação", separa por vírgula
-    // e conta quantas vezes cada tema aparece
     private fun contarTemas(problemasCrus: List<String>): List<VotoContagem> {
         val contador = mutableMapOf<String, Int>()
 
@@ -101,7 +115,11 @@ class ResultadoActivity : AppCompatActivity() {
         chart.xAxis.position = XAxis.XAxisPosition.BOTTOM
         chart.xAxis.granularity = 1f
         chart.xAxis.labelRotationAngle = -30f
+        chart.xAxis.textSize = 10f
+        chart.axisLeft.axisMinimum = 0f
         chart.description.isEnabled = false
+        chart.legend.isEnabled = false
+        chart.setExtraBottomOffset(40f)
         chart.animateY(800)
         chart.invalidate()
     }

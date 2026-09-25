@@ -23,10 +23,11 @@
 
             <TextView
                 android:id="@+id/textView8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="346dp"
+                android:layout_height="38dp"
                 android:layout_marginBottom="16dp"
-                android:text="Principais Problemas"
+                android:text="@string/principaisProblemas"
+                android:textAlignment="center"
                 android:textSize="28sp"
                 android:textStyle="bold" />
 
@@ -34,63 +35,63 @@
                 android:id="@+id/saude"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Saúde" />
+                android:text="@string/saude" />
 
             <CheckBox
                 android:id="@+id/violenciaSegurancaPublica"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Violência e Segurança Pública" />
+                android:text="@string/viole" />
 
             <CheckBox
                 android:id="@+id/economiaInflacao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Economia e Inflação" />
+                android:text="@string/eco" />
 
             <CheckBox
                 android:id="@+id/educacao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Educação" />
+                android:text="@string/edu" />
 
             <CheckBox
                 android:id="@+id/corrupcao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Corrupção" />
+                android:text="@string/corru" />
 
             <CheckBox
                 android:id="@+id/desemprego"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Desemprego" />
+                android:text="@string/desemp" />
 
             <CheckBox
                 android:id="@+id/fomePobreza"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Fome e Pobreza" />
+                android:text="@string/fome" />
 
             <CheckBox
                 android:id="@+id/desiquidadeSocial"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Desigualdade Social" />
+                android:text="@string/desiso" />
 
             <CheckBox
                 android:id="@+id/maAdmin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Má Administração" />
+                android:text="@string/maadm" />
 
             <CheckBox
                 android:id="@+id/salario"
@@ -98,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="32dp"
-                android:text="Salário" />
+                android:text="@string/salario" />
 
             <Button
                 android:id="@+id/btConfirmar"
@@ -106,7 +107,7 @@
                 android:layout_height="65dp"
                 android:layout_gravity="center_horizontal"
                 android:backgroundTint="#2D3094"
-                android:text="Confirmar"
+                android:text="@string/confirmar"
                 android:textSize="24sp"
                 app:cornerRadius="10dp" />
         </LinearLayout>

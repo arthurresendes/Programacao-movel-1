@@ -88,14 +88,10 @@ class EstimuladaActivity : AppCompatActivity() {
                     "Candidato selecionado: $valor",
                     Toast.LENGTH_SHORT
                 ).show()
-
-                val intent = Intent(
+                direcionando(
                     this@EstimuladaActivity,
                     ProblemasActivity::class.java
                 )
-
-                startActivity(intent)
-
             } else {
 
                 Toast.makeText(

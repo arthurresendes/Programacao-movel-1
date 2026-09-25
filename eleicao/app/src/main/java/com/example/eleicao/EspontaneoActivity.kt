@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -12,9 +13,9 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.eleicao.data.PesquisaAtual
 
 class EspontaneoActivity : AppCompatActivity() {
-
     private lateinit var etCandidato: EditText
     private lateinit var btConfirmar: Button
+    private lateinit var voltar: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +24,11 @@ class EspontaneoActivity : AppCompatActivity() {
 
         etCandidato = findViewById<EditText>(R.id.etEspontaneo)
         btConfirmar = findViewById<Button>(R.id.btConfirmar)
+        voltar = findViewById<ImageButton>(R.id.voltar)
+
+        voltar.setOnClickListener {
+            direcionando(this@EspontaneoActivity, LoginActivity::class.java)
+        }
 
         btConfirmar.setOnClickListener {
 
@@ -32,13 +38,10 @@ class EspontaneoActivity : AppCompatActivity() {
 
                 PesquisaAtual.candidatoEspontaneo = candidato
 
-                val intent = Intent(
+                direcionando(
                     this@EspontaneoActivity,
                     EstimuladaActivity::class.java
                 )
-
-                startActivity(intent)
-
             } else {
 
                 Toast.makeText(
