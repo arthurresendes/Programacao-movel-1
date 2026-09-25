@@ -9,12 +9,11 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="278dp"
-        android:layout_height="208dp"
-        android:src="@drawable/eleicoes"
+        android:layout_width="438dp"
+        android:layout_height="749dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/pokemoin" />
 </androidx.constraintlayout.widget.ConstraintLayout>

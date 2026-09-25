@@ -1,20 +1,106 @@
 package com.example.eleicao
 
+import android.graphics.Color
 import android.os.Bundle
+import android.view.View
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
+import com.example.eleicao.data.AppDatabase
+import com.example.eleicao.data.EntrevistadoComLocalizacao
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class EleitoresActivity : AppCompatActivity() {
+
+    private lateinit var containerPesquisas: LinearLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_eleitores)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        containerPesquisas = findViewById(R.id.container_pesquisas)
+        carregarPesquisas()
+    }
+
+    // Chama de novo toda vez que a tela volta a ficar visível,
+    // assim a lista sempre aparece atualizada com os novos entrevistados
+    override fun onResume() {
+        super.onResume()
+        carregarPesquisas()
+    }
+
+    private fun carregarPesquisas() {
+        val banco = AppDatabase.getDatabase(this)
+        lifecycleScope.launch {
+            val pesquisas = withContext(Dispatchers.IO) {
+                banco.entrevistadoDao().buscarEntrevistadosComLocalizacao()
+            }
+            exibirPesquisas(pesquisas)
+        }
+    }
+
+    private fun exibirPesquisas(pesquisas: List<EntrevistadoComLocalizacao>) {
+        containerPesquisas.removeAllViews()
+
+        if (pesquisas.isEmpty()) {
+            val texto = TextView(this)
+            texto.text = "Nenhuma pesquisa encontrada."
+            texto.textSize = 18f
+            texto.setPadding(0, 20, 0, 20)
+            containerPesquisas.addView(texto)
+            return
+        }
+
+        val formato = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale("pt", "BR"))
+
+        for (pesquisa in pesquisas) {
+            val bloco = LinearLayout(this)
+            bloco.orientation = LinearLayout.VERTICAL
+            bloco.setPadding(24, 20, 24, 20)
+            bloco.setBackgroundResource(R.drawable.borda_item) // borda em vez de card
+
+            val layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            layoutParams.setMargins(0, 0, 0, 12) // espaço entre um bloco e outro
+            bloco.layoutParams = layoutParams
+
+            val nome = TextView(this)
+            nome.text = "Nome: ${pesquisa.nome}"
+            nome.textSize = 18f
+            nome.setTextColor(Color.BLACK)
+
+            val telefone = TextView(this)
+            telefone.text = "Telefone: ${pesquisa.telefone}"
+            telefone.textSize = 16f
+            telefone.setTextColor(Color.DKGRAY)
+
+            val endereco = TextView(this)
+            endereco.text = "Endereço: ${pesquisa.endereco}"
+            endereco.textSize = 16f
+            endereco.setTextColor(Color.DKGRAY)
+
+            val data = TextView(this)
+            data.text = "Finalizado em: ${formato.format(Date(pesquisa.dataFinalizacao))}"
+            data.textSize = 14f
+            data.setTextColor(Color.GRAY)
+            data.setPadding(0, 8, 0, 0)
+
+            bloco.addView(nome)
+            bloco.addView(telefone)
+            bloco.addView(endereco)
+            bloco.addView(data)
+
+            containerPesquisas.addView(bloco)
         }
     }
 }

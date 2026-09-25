@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="62dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="88dp"
         android:layout_marginEnd="61dp"
         android:text="Dados do Entrevistado"
         android:textSize="30sp"
@@ -23,46 +23,36 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/etNome"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="96dp"
-        android:layout_marginEnd="101dp"
-        android:ems="10"
+        android:id="@+id/et_nome"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="104dp"
+        android:background="@drawable/edittext_borda"
         android:hint="Seu nome"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <EditText
-        android:id="@+id/etTelefone"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="220dp"
-        android:layout_marginEnd="101dp"
-        android:ems="10"
-        android:hint="Seu número de telefone"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:id="@+id/et_numero"
+        android:layout_width="196dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="104dp"
+        android:background="@drawable/edittext_borda"
+        android:hint="Digite o telefone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="101dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="76dp"
         android:layout_marginEnd="262dp"
         android:text="Nome"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -71,30 +61,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="101dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="254dp"
-        android:text="Celular"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="262dp"
+        android:text="Telefone"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etNome" />
+        app:layout_constraintTop_toBottomOf="@+id/et_nome" />
 
     <Button
         android:id="@+id/btFinalizar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="145dp"
-        android:layout_marginTop="104dp"
-        android:layout_marginEnd="145dp"
+        android:layout_width="165sp"
+        android:layout_height="65sp"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="56dp"
         android:backgroundTint="#2D9443"
         android:text="Finalizar"
         android:textSize="16sp"
-        app:cornerRadius="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
+        app:cornerRadius="10sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etTelefone" />
+        app:layout_constraintTop_toBottomOf="@+id/et_numero" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,7 +8,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.eleicao.direcionando
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var etUser: EditText
@@ -21,7 +20,7 @@ class LoginActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
         etUser = findViewById<EditText>(R.id.usuario)
-        etSenha = findViewById<EditText>(R.id.senha)
+        etSenha = findViewById<EditText>(R.id.usuario)
         btAcessar = findViewById<Button>(R.id.acessar)
         btFinalizar = findViewById<Button>(R.id.finalizar)
 

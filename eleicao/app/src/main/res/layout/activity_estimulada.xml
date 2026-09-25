@@ -1,104 +1,228 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".EstimuladaActivity">
-    <RadioGroup
-        android:id="@+id/radioGroupOpcoes"
-        android:layout_width="match_parent"
+
+    <!-- MEW -->
+
+    <LinearLayout
+        android:id="@+id/candidatoMew"
+        android:layout_width="410dp"
+        android:layout_height="100dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/candidatoBulbassauro">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="65dp"
+            android:contentDescription="Mew"
+            android:scaleType="centerCrop"
+            android:src="@drawable/mew" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Mew"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+    <!-- PIKACHU -->
+
+    <LinearLayout
+        android:id="@+id/candidatoPikachu"
+        android:layout_width="410dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="1dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/candidatoCharmander">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="65dp"
+            android:contentDescription="Pikachu"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bonechu" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="pikachu"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+    <!-- SQUIRTLE -->
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardCandidatoUm"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginStart="2dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="2dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:strokeColor="@android:color/transparent"
+        app:strokeWidth="2dp">
+
+        <LinearLayout
+            android:layout_width="410dp"
+            android:layout_height="100dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="65dp"
+                android:contentDescription="Squirtle"
+                android:scaleType="centerCrop"
+                android:src="@drawable/squirtle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Squirtle"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <!-- CHARMANDER -->
+
+
+    <!-- BULBASSAURO -->
+
+    <LinearLayout
+        android:id="@+id/candidatoCharmander"
+        android:layout_width="410dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="4dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardCandidatoUm">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="65dp"
+            android:contentDescription="Charmander"
+            android:scaleType="centerCrop"
+            android:src="@drawable/charmander" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Charmander"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/candidatoBulbassauro"
+        android:layout_width="410dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="1dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/candidatoPikachu">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="65dp"
+            android:contentDescription="Bulbassauro"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bulbassauro" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Bulbassauro"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+    <!-- BRANCO / NULO / NÃO SEI -->
+
+    <RadioGroup
+        android:id="@+id/radioGroupOpcoes"
+        android:layout_width="406dp"
+        android:layout_height="125dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="7dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/candidatoMew">
 
         <RadioButton
-            android:id="@+id/butcher"
-            android:layout_width="384dp"
-            android:layout_height="60dp"
-            android:background="#F6CFCF"
-            android:drawableStart="@drawable/ic_launcher_background"
-            android:drawablePadding="12dp"
-            android:text="Butcher" />
-
-        <RadioButton
-            android:id="@+id/homelander"
-            android:layout_width="384dp"
-            android:layout_height="60dp"
-            android:background="#C0F0F8"
-            android:drawableStart="@drawable/ic_launcher_background"
-            android:drawablePadding="12dp"
-            android:text="Homelander" />
-
-        <RadioButton
-            android:id="@+id/deep"
-            android:layout_width="384dp"
-            android:layout_height="60dp"
-            android:background="#E8BBFB"
-            android:drawableStart="@drawable/ic_launcher_background"
-            android:drawablePadding="12dp"
-            android:text="Deep" />
-
-        <RadioButton
-            android:id="@+id/hughie"
-            android:layout_width="384dp"
-            android:layout_height="60dp"
-            android:background="#EFFBB4"
-            android:drawableStart="@drawable/ic_launcher_background"
-            android:drawablePadding="12dp"
-            android:text="Hughie" />
-
-        <RadioButton
-            android:id="@+id/soldierBoy"
-            android:layout_width="384dp"
-            android:layout_height="60dp"
-            android:background="#CCFBC5"
-            android:drawableStart="@drawable/ic_launcher_background"
-            android:drawablePadding="12dp"
-            android:text="Soldier Boy" />
-
-        <RadioButton
-            android:id="@+id/branco"
-            android:layout_width="384dp"
-            android:layout_height="60dp"
+            android:id="@+id/radioButton4"
+            android:layout_width="match_parent"
+            android:layout_height="33dp"
             android:text="Branco" />
 
         <RadioButton
-            android:id="@+id/nulo"
-            android:layout_width="384dp"
-            android:layout_height="60dp"
-            android:background="#C7C7C7"
+            android:id="@+id/radioButton5"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
             android:text="Nulo" />
 
         <RadioButton
-            android:id="@+id/naoSei"
-            android:layout_width="384dp"
-            android:layout_height="60dp"
-            android:background="#D7DBFD"
+            android:id="@+id/radioButton6"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
             android:text="Não sei" />
 
     </RadioGroup>
 
+
+    <!-- BOTÃO CONFIRMAR -->
+
     <Button
         android:id="@+id/btConfirmarEstimulada"
-        android:layout_width="248dp"
+        android:layout_width="165dp"
         android:layout_height="65dp"
-        android:layout_marginStart="145dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="145dp"
+        android:layout_marginStart="123dp"
         android:backgroundTint="#2D3094"
         android:text="Confirmar"
-        android:textSize="24sp"
+        android:textColor="#FFFFFF"
         app:cornerRadius="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroupOpcoes" />
 

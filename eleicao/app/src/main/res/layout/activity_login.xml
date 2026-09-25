@@ -7,62 +7,24 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="166dp"
-        android:layout_height="91dp"
-        android:layout_marginTop="56dp"
-        android:src="@drawable/eleicoes"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Usuário"
-        android:textColorLink="#3D498A"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
     <EditText
         android:id="@+id/usuario"
-        android:layout_width="280dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="Digite seu nome"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="210dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="100dp"
+        android:background="@drawable/edittext_borda"
+        android:hint="Usuário"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Senha"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usuario" />
-
     <EditText
         android:id="@+id/senha"
-        android:layout_width="280dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="Sua senha"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="210dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/edittext_borda"
+        android:hint="Senha"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -70,29 +32,63 @@
         android:id="@+id/acessar"
         android:layout_width="0dp"
         android:layout_height="65dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="40dp"
         android:backgroundTint="#2B527E"
         android:text="Acessar"
         android:textSize="20sp"
         app:cornerRadius="10dp"
-        app:layout_constraintEnd_toStartOf="@+id/finalizar"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="@+id/senha"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/senha" />
 
     <Button
         android:id="@+id/finalizar"
         android:layout_width="0dp"
         android:layout_height="65dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
         android:backgroundTint="#2D5685"
         android:text="Finalizar"
         android:textSize="20sp"
         app:cornerRadius="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/senha"
         app:layout_constraintStart_toEndOf="@+id/acessar"
         app:layout_constraintTop_toBottomOf="@+id/senha" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="31dp"
+        android:text="Senha"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/usuario" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:text="Usuário"
+        android:textColorLink="#3D498A"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="350dp"
+        android:layout_height="267dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="31dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/pokemoin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
