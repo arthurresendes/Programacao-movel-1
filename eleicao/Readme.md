@@ -1,1 +1,2 @@
-# P1 - Projeto eleiçoes Pokemon 1 geração
+# P1 - Projeto eleições Pokémon - Geração I
+
