@@ -1,595 +1,343 @@
-# P1 - Projeto eleições Pokémon - Geração I
+<div align="center">
 
-Este projeto é um aplicativo Android desenvolvido em Kotlin para simular uma pesquisa eleitoral com temática de Pokémon da Geração I. A aplicação coleta dados de entrevistados, registra a intenção de voto, salva problemas prioritários, registra a localização do usuário e apresenta gráficos com os resultados.
+# 🗳️ Eleição Pokémon — Geração I
 
-A estrutura foi pensada para funcionar como uma pesquisa de opinião, com fluxo de telas que vai desde o login até a geração de relatórios estatísticos.
+**Aplicativo Android de pesquisa eleitoral com temática Pokémon**
 
----
+![Kotlin](https://img.shields.io/badge/Kotlin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)
+![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)
+![Room](https://img.shields.io/badge/Room-SQLite-4285F4?style=for-the-badge&logo=sqlite&logoColor=white)
+![MPAndroidChart](https://img.shields.io/badge/MPAndroidChart-v3.1.0-FF6F00?style=for-the-badge)
+![minSdk](https://img.shields.io/badge/minSdk-24-blue?style=for-the-badge)
 
-## Visão geral da aplicação
-
-A aplicação segue um fluxo simples:
-
-1. Tela inicial de abertura
-2. Login do usuário
-3. Caso seja administrador:
-   - acesso ao menu administrativo
-   - consulta do total de entrevistados
-   - visualização dos dados
-   - limpeza dos dados salvos
-4. Caso seja entrevistado:
-   - digitar candidato espontâneo
-   - escolher voto estimulado
-   - selecionar 3 problemas principais
-   - informar nome e telefone
-   - registrar localização
-   - salvar os dados no banco local
-5. Visualização de relatórios:
-   - top 5 candidatos espontâneos
-   - votos estimulados
-   - problemas mais citados
+</div>
 
 ---
 
-## Estrutura do projeto
+## 📑 Sumário
+
+- [Sobre o projeto](#-sobre-o-projeto)
+- [Funcionalidades](#-funcionalidades)
+- [Requisitos funcionais atendidos](#-requisitos-funcionais-atendidos)
+- [Fluxo do aplicativo](#-fluxo-do-aplicativo)
+- [Acessos de teste](#-acessos-de-teste)
+- [Tecnologias](#-tecnologias)
+- [Estrutura do projeto](#-estrutura-do-projeto)
+- [Telas (Activities)](#-telas-activities)
+- [Camada de dados (Room)](#-camada-de-dados-room)
+- [Layouts XML](#-layouts-xml)
+- [Como executar](#-como-executar)
+- [Limitações conhecidas](#-limitações-conhecidas)
+
+---
+
+## 🎯 Sobre o projeto
+
+Aplicativo Android desenvolvido em **Kotlin** que simula uma pesquisa eleitoral com candidatos da **Geração I de Pokémon**. Ele coleta os dados do entrevistado, registra a intenção de voto (espontânea e estimulada), os problemas considerados prioritários e a **localização geográfica** de onde a entrevista foi concluída. Ao final, apresenta os resultados em **gráficos**.
+
+O projeto foi construído com fins didáticos: **5 candidatos** e **10 problemas** disponíveis para escolha.
+
+## ✨ Funcionalidades
+
+| Perfil | O que faz |
+|---|---|
+| 🧑‍💼 **Entrevistador** | Percorre o questionário: voto espontâneo → voto estimulado → 3 problemas → dados pessoais → localização → salva. |
+| 🛠️ **Administrador** | Consulta a lista de entrevistados, visualiza os gráficos de resultado, vê o total de entrevistas e limpa os dados. |
+
+**Destaques:**
+
+- 📍 Captura da localização (GPS) e conversão para endereço legível via `Geocoder`
+- 🕒 Data e hora de finalização salvas automaticamente em cada entrevista
+- 📊 Três gráficos dinâmicos: Top 5 espontâneo, pizza do voto estimulado e temas mais citados
+- 📱 Validação de telefone (DDD + celular com 9 dígitos, rejeita números repetidos)
+- ✅ Seleção obrigatória de **exatamente 3** problemas
+- 💾 Persistência local com Room — os dados sobrevivem ao fechamento do app
+- 🔁 Lista de entrevistados e contador atualizados automaticamente (`onResume`)
+
+## 📋 Requisitos funcionais atendidos
+
+| Código | Requisito | Onde é atendido |
+|:---:|---|---|
+| **RF01** | Login com dois usuários pré-cadastrados | `LoginActivity` |
+| **RF02** | Registrar a intenção de voto no candidato | `EspontaneoActivity`, `EstimuladaActivity` |
+| **RF03** | Registrar três problemas apontados | `ProblemasActivity` |
+| **RF04** | Registrar nome, celular, data/hora e posição geográfica | `DadosEntrevistadoActivity` |
+| **RF05** | Seguir a ordem espontânea → estimulada → problemas | Fluxo encadeado entre as Activities |
+| **RF06** | Visualizar os resultados das pesquisas | `ResultadoActivity` |
+| **RF07** | Consultar os entrevistados | `EleitoresActivity` |
+| **RF08** | Limpar os dados da pesquisa | `AdminMenuActivity` (botão *Limpar dados*) |
+
+## 🔄 Fluxo do aplicativo
+
+```mermaid
+flowchart TD
+    A["MainActivity<br/>splash de 3s"] --> B["LoginActivity"]
+
+    B -->|admin| C["AdminMenuActivity"]
+    B -->|entrevistado| D["EspontaneoActivity"]
+
+    C --> E["EleitoresActivity<br/>lista de entrevistados"]
+    C --> F["ResultadoActivity<br/>gráficos"]
+    C --> G["Limpar dados"]
+
+    D --> H["EstimuladaActivity"]
+    H --> I["ProblemasActivity<br/>exatamente 3"]
+    I --> J["DadosEntrevistadoActivity<br/>nome, telefone, GPS"]
+    J -->|salva no Room| D
+```
+
+Depois de salvar uma entrevista, o app volta para a tela espontânea, pronto para a próxima pessoa.
+
+## 🔑 Acessos de teste
+
+Usuários fixos, definidos em código para fins didáticos:
+
+| Perfil | Usuário | Senha |
+|---|---|---|
+| Administrador | `admin` | `admin` |
+| Entrevistador | `entrevistado` | `entrevistado` |
+
+## 🧰 Tecnologias
+
+| Tecnologia | Uso |
+|---|---|
+| **Kotlin** | Linguagem principal |
+| **Room** (+ KSP) | Banco de dados local (SQLite) |
+| **Coroutines** (`lifecycleScope`, `Dispatchers.IO`) | Acesso ao banco fora da thread principal |
+| **MPAndroidChart** `v3.1.0` (via JitPack) | Gráficos de barras e pizza |
+| **Google Play Services Location** | `FusedLocationProviderClient` para o GPS |
+| **Geocoder** | Converte latitude/longitude em endereço |
+| **Material Components** | `MaterialCardView`, botões e temas |
+| **ConstraintLayout / ScrollView** | Estrutura das telas |
+
+**Configuração:** `minSdk 24` · `targetSdk 37` · Java 11
+
+**Permissões:** `ACCESS_FINE_LOCATION` e `ACCESS_COARSE_LOCATION`
+
+## 🗂️ Estrutura do projeto
 
 ```text
 eleicao/
-├── app/
-│   └── src/
-│       └── main/
-│           ├── java/
-│           │   └── com/example/eleicao/
-│           │       ├── MainActivity.kt
-│           │       ├── LoginActivity.kt
-│           │       ├── AdminMenuActivity.kt
-│           │       ├── EleitoresActivity.kt
-│           │       ├── EspontaneoActivity.kt
-│           │       ├── EstimuladaActivity.kt
-│           │       ├── ProblemasActivity.kt
-│           │       ├── DadosEntrevistadoActivity.kt
-│           │       ├── ResultadoActivity.kt
-│           │       ├── Redirecionar.kt
-│           │       ├── Voltar.kt
-│           │       └── data/
-│           │           ├── AppData.kt
-│           │           ├── Entrevistado.kt
-│           │           ├── Resposta.kt
-│           │           ├── Endereco.kt
-│           │           ├── PesquisaAtual.kt
-│           │           ├── EntrevistadoDao.kt
-│           │           ├── RespostaDao.kt
-│           │           ├── EnderecoDao.kt
-│           │           ├── EntrevistadoComLocalizacao.kt
-│           │           ├── VotoContagem.kt
-│           │           └── ...
-│           └── res/
-│               └── layout/
-│                   ├── activity_main.xml
-│                   ├── activity_login.xml
-│                   ├── activity_admin_menu.xml
-│                   ├── activity_eleitores.xml
-│                   ├── activity_espontaneo.xml
-│                   ├── activity_estimulada.xml
-│                   ├── activity_problemas.xml
-│                   ├── activity_dados_entrevistado.xml
-│                   └── activity_resultado.xml
+└── app/src/main/
+    ├── java/com/example/eleicao/
+    │   ├── MainActivity.kt
+    │   ├── LoginActivity.kt
+    │   ├── AdminMenuActivity.kt
+    │   ├── EleitoresActivity.kt
+    │   ├── EspontaneoActivity.kt
+    │   ├── EstimuladaActivity.kt
+    │   ├── ProblemasActivity.kt
+    │   ├── DadosEntrevistadoActivity.kt
+    │   ├── ResultadoActivity.kt
+    │   ├── Redirecionar.kt          # fun Activity.direcionando(...)
+    │   ├── Voltar.kt                # fun Activity.voltando()
+    │   ├── Finalizando.kt           # fun Activity.finalizar()
+    │   └── data/
+    │       ├── AppData.kt           # AppDatabase (Room)
+    │       ├── Entrevistado.kt
+    │       ├── respostas.kt         # entidade Resposta
+    │       ├── Endereco.kt
+    │       ├── PesquisaAtual.kt     # memória temporária da entrevista
+    │       ├── EntrevistadoDao.kt
+    │       ├── RespostaDao.kt
+    │       ├── EnderecoDao.kt
+    │       ├── EntrevistadoComLocalizacao.kt
+    │       └── VotoContagem.kt
+    └── res/
+        ├── layout/                  # 9 telas XML
+        └── drawable/                # imagens dos candidatos, ícone de seta, bordas
+```
 
-Pasta main: lógica das Activities
-A pasta main/java/com/example/eleicao contém as telas e os fluxos da aplicação. Cada arquivo .kt representa uma Activity ou utilitário.
+## 📱 Telas (Activities)
 
-1. MainActivity.kt
-Responsável pela tela inicial da aplicação.
+### `MainActivity`
+Tela de abertura (splash). Exibe a imagem do app e, após **3 segundos** (`delay(3000)` em `lifecycleScope`), segue automaticamente para o login.
 
-Inicializa a tela com activity_main.xml
-Usa lifecycleScope e delay(3000) para manter a splash screen por 3 segundos
-Após esse tempo, redireciona automaticamente para LoginActivity
-Essa tela funciona como abertura do app, sendo semelhante a uma splash screen.
+### `LoginActivity`
+Valida usuário e senha. `admin` vai para o menu administrativo; `entrevistado` inicia a pesquisa; qualquer outra combinação mostra um `Toast` de erro. Também possui o botão de sair, que encerra o app (`finalizar()`).
 
-2. LoginActivity.kt
-Controla o login do sistema.
+### `AdminMenuActivity`
+Painel do administrador.
+- Mostra o **total de entrevistados**, atualizado em `onResume()`
+- Acessa **Eleitores** e **Resultados**
+- **Limpar dados** apaga as tabelas `entrevistados` e `respostas`
 
-Busca os campos de usuário e senha (EditText)
-Valida as credenciais:
-admin / admin
-entrevistado / entrevistado
-Caso seja usuário admin:
-redireciona para AdminMenuActivity
-Caso seja entrevistado:
-redireciona para EspontaneoActivity
-Caso contrário:
-exibe mensagem de erro com Toast
-Essa activity funciona como a porta de entrada do sistema.
+### `EleitoresActivity`
+Lista os entrevistados de forma dinâmica: cada um vira um bloco com **borda**, mostrando nome, telefone, endereço e a **data/hora de finalização**. A lista fica dentro de um `ScrollView` e cresce conforme novas entrevistas são salvas.
 
-3. AdminMenuActivity.kt
-Tela administrativa do app.
+### `EspontaneoActivity`
+O entrevistado digita, sem ajuda, o candidato em quem votaria. Valida campo vazio, guarda em `PesquisaAtual.candidatoEspontaneo` e segue.
 
-Carrega o banco usando AppDatabase.getDatabase(this)
-Exibe o total de entrevistados em tempo real
-Possui três ações principais:
-visualizar eleitores
-visualizar resultados
-limpar todos os dados
-Usa coroutines para consultar o banco em segundo plano e atualizar a interface
-Principais funções:
+### `EstimuladaActivity`
+Exibe os **5 candidatos** em cards com imagem (Mew, Pikachu, Charmander, Bulbassauro e Squirtle), além das opções **Branco**, **Nulo** e **Não sei**. A opção escolhida recebe destaque visual, e a seleção anterior é limpa. Guarda em `PesquisaAtual.voto`.
 
-atualizarTotal(): consulta a quantidade de entrevistados
-btLimpar.setOnClickListener: apaga os dados das tabelas entrevistados e respostas
-4. EleitoresActivity.kt
-Responsável por listar os entrevistados cadastrados.
+### `ProblemasActivity`
+Dez `CheckBox` (Saúde, Violência e Segurança Pública, Economia e Inflação, Educação, Corrupção, Desemprego, Fome e Pobreza, Desigualdade Social, Má Administração e Salário). Só avança com **exatamente 3** marcados; o resultado é salvo como texto separado por vírgula em `PesquisaAtual.problemas`.
 
-Consulta o banco usando buscarEntrevistadosComLocalizacao()
-Recupera nome, telefone e endereço
-Exibe os resultados em um LinearLayout dentro de um ScrollView
-Também mostra a data de finalização da pesquisa
-Ela oferece ao administrador uma visão dos dados coletados e da localização associada a cada entrevista.
+### `DadosEntrevistadoActivity`
+Etapa final:
+1. Valida nome e telefone
+2. Solicita a permissão de localização
+3. Obtém a posição com `FusedLocationProviderClient`
+4. Converte em endereço com `Geocoder`
+5. Salva `Entrevistado`, `Resposta` e `Endereco` no banco
+6. Limpa `PesquisaAtual` e volta para a tela espontânea
 
-5. EspontaneoActivity.kt
-Tela de pesquisa espontânea.
+### `ResultadoActivity`
+Tela de relatórios com três gráficos do MPAndroidChart:
 
-Usuário digita o nome do candidato que ele lembra sem ajuda
-Valida se o campo não está vazio
-Guarda esse valor em PesquisaAtual.candidatoEspontaneo
-Redireciona para EstimuladaActivity
-Essa etapa representa a primeira parte da intenção de voto.
+| Gráfico | Tipo | Origem dos dados |
+|---|---|---|
+| Voto espontâneo — Top 5 | Barras | `top5Espontaneos()` |
+| Voto estimulado | Pizza | `contagemPorVoto()` |
+| Temas mais importantes | Barras | `listarTodosProblemas()` + `contarTemas()` |
 
-6. EstimuladaActivity.kt
-Tela de voto estimulado.
+Como os problemas são salvos em um único texto (`"Saúde, Educação, Corrupção"`), a função `contarTemas()` separa por vírgula, conta as ocorrências de cada tema e ordena do mais citado para o menos citado.
 
-Exibe candidatos em cards ou blocos com imagem e texto
-Permite a seleção de um candidato
-Também oferece opções de voto:
-Branco
-Nulo
-Não sei
-Guarda a escolha em PesquisaAtual.voto
-Redireciona para ProblemasActivity
-Aqui a lógica visual é importante:
+### Utilitários
 
-quando uma opção é selecionada, o item recebe destaque visual
-o RadioGroup limpa a seleção anterior para manter consistência na interface
-7. ProblemasActivity.kt
-Tela para selecionar os três principais problemas do entrevistado.
+| Arquivo | Função | Descrição |
+|---|---|---|
+| `Redirecionar.kt` | `Activity.direcionando(pagAtual, pageProx)` | Abre outra Activity, evitando repetir `Intent` |
+| `Voltar.kt` | `Activity.voltando()` | Fecha a tela atual (`finish()`) |
+| `Finalizando.kt` | `Activity.finalizar()` | Encerra o app inteiro (`finishAffinity()`) |
 
-Possui vários CheckBox para temas como:
-Saúde
-Violência
-Economia
-Educação
-Corrupção
-Desemprego
-Fome
-Desigualdade
-Má administração
-Salário
-Valida que exatamente 3 itens sejam selecionados
-Salva os problemas em PesquisaAtual.problemas
-Redireciona para DadosEntrevistadoActivity
-Essa parte é essencial para a análise de opinião pública.
+## 💾 Camada de dados (Room)
 
-8. DadosEntrevistadoActivity.kt
-Tela final de coleta dos dados do entrevistado.
+### Modelo
 
-Recebe:
-nome
-telefone
-Valida o telefone
-Salva os dados temporários em PesquisaAtual
-Solicita permissão de localização
-Obtém a localização atual usando FusedLocationProviderClient
-Converte latitude/longitude em endereço com Geocoder
-Salva tudo no banco:
-entrevistado
-resposta
-localização
-Essa é a etapa final da pesquisa. Depois disso, os dados ficam persistidos localmente.
+```mermaid
+erDiagram
+    ENTREVISTADOS ||--o| LOCALIZACOES : "possui"
 
-9. ResultadoActivity.kt
-Tela de relatórios e gráficos.
+    ENTREVISTADOS {
+        int id PK
+        string nome
+        string telefone
+        long dataFinalizacao
+    }
+    LOCALIZACOES {
+        int id PK
+        int entrevistadoId FK
+        double latitude
+        double longitude
+        string endereco
+    }
+    RESPOSTAS {
+        int id PK
+        string problemas
+        string voto
+        string candidatoEspontaneo
+    }
+```
 
-Consulta o banco para obter:
-quantidade total de respostas
-top 5 candidatos espontâneos
-contagem por voto estimulado
-temas mais citados
-Usa gráficos do MPAndroidChart:
-BarChart para candidatos espontâneos
-PieChart para votação estimulada
-BarChart para problemas
-A função contarTemas() separa os temas e conta quantas vezes apareceram
-Essa tela permite ao administrador interpretar os resultados em formato visual.
+### Arquivos
 
-10. Redirecionar.kt
-Arquivo utilitário para navegação entre Activities.
+| Arquivo | Papel |
+|---|---|
+| `AppData.kt` | `AppDatabase`: banco `eleicao_database`, versão `4`, padrão **Singleton**, com `fallbackToDestructiveMigration()` |
+| `Entrevistado.kt` | Entidade `entrevistados`. O campo `dataFinalizacao` recebe `System.currentTimeMillis()` automaticamente |
+| `respostas.kt` | Entidade `respostas` (problemas, voto e candidato espontâneo) |
+| `Endereco.kt` | Entidade `localizacoes` (latitude, longitude e endereço em texto) |
+| `PesquisaAtual.kt` | `object` que guarda os dados temporários enquanto a entrevista acontece; `limpar()` zera tudo após salvar |
+| `EntrevistadoDao.kt` | Inserir, contar, apagar e listar entrevistados com localização (`LEFT JOIN`) |
+| `RespostaDao.kt` | Inserir, contar, apagar, contagem por voto, Top 5 espontâneo e listagem de problemas |
+| `EnderecoDao.kt` | Inserir e apagar localizações |
+| `EntrevistadoComLocalizacao.kt` | Classe de leitura que junta entrevistado e endereço |
+| `VotoContagem.kt` | Par `voto` + `quantidade`, usado para alimentar os gráficos |
 
-Kotlin
-fun Activity.direcionando(pagAtual: Activity, pageProx: Class<*>){
-    val intent = Intent(pagAtual, pageProx)
-    startActivity(intent)
-}
-Esse método encapsula a abertura de uma nova Activity, evitando repetição de código no projeto.
+### Consultas principais
 
-11. Voltar.kt
-Arquivo utilitário para finalizar a Activity atual.
-
-Kotlin
-fun Activity.voltando(){
-    finish()
-}
-Esse método é usado para voltar para a tela anterior.
-
-Pasta data: explicação aprofundada
-A pasta data contém a camada de persistência do aplicativo. Ela é responsável por armazenar e consultar os dados de forma organizada.
-
-1. AppData.kt
-Arquivo principal do banco Room.
-
-Anotado com @Database
-Define as entidades:
-Entrevistado
-Resposta
-Endereco
-Cria a base de dados SQLite:
-nome: eleicao_database
-Usa padrão Singleton para manter uma única instância do banco
-Código principal:
-
-Kotlin
-@Database(
-    entities = [Entrevistado::class, Resposta::class, Endereco::class],
-    version = 4,
-    exportSchema = false
-)
-abstract class AppDatabase : RoomDatabase()
-Esse arquivo é o coração do armazenamento local do aplicativo.
-
-2. Entrevistado.kt
-Representa a tabela de entrevistados.
-
-Kotlin
-@Entity(tableName = "entrevistados")
-data class Entrevistado(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
-    val nome: String,
-    val telefone: String,
-    val dataFinalizacao: Long = System.currentTimeMillis()
-)
-Campos:
-
-id: chave primária auto incrementada
-nome: nome do entrevistado
-telefone: telefone informado
-dataFinalizacao: data e hora em milissegundos
-Esse objeto representa um registro da pessoa entrevistada.
-
-3. Resposta.kt
-Arquivo responsável pela tabela de respostas.
-
-Kotlin
-@Entity(tableName = "respostas")
-data class Resposta(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
-    val problemas: String,
-    val voto: String,
-    val candidatoEspontaneo: String
-)
-Armazena:
-
-problemas selecionados
-voto estimulado
-candidato espontâneo
-As respostas ficam separadas em uma tabela específica para que o sistema possa gerar gráficos e estatísticas.
-
-4. Endereco.kt
-Representa a tabela de localizações.
-
-Kotlin
-@Entity(tableName = "localizacoes")
-data class Endereco(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
-    val entrevistadoId: Int,
-    val latitude: Double,
-    val longitude: Double,
-    val endereco: String
-)
-Campos:
-
-entrevistadoId: referência ao entrevistado
-latitude e longitude: localização exata
-endereco: endereço em texto formatado
-Essa tabela relaciona a pesquisa ao local em que a entrevista foi concluída.
-
-5. PesquisaAtual.kt
-Objeto singleton usado para guardar dados temporários durante a entrevista.
-
-Kotlin
-object PesquisaAtual {
-    var candidatoEspontaneo: String = ""
-    var voto: String = ""
-    var problemas: String = ""
-    var nome: String = ""
-    var telefone: String = ""
-}
-Esse objeto funciona como memória temporária do fluxo da aplicação. Ele evita que os dados tenham de ser passados de uma tela para outra por meio de Intent.
-
-Quando a pesquisa é salva, o objeto é limpo com:
-
-Kotlin
-fun limpar()
-6. EntrevistadoDao.kt
-Interface DAO para a entidade Entrevistado.
-
-Responsabilidades:
-
-inserir entrevista
-buscar todos
-contar a quantidade
-apagar todos
-montar a listagem com localização
-Exemplo de query importante:
-
-Kotlin
+```kotlin
+// Listagem de entrevistados com endereço
 @Query("""
-    SELECT 
-        e.id AS id,
-        e.nome AS nome,
-        e.telefone AS telefone,
-        e.dataFinalizacao AS dataFinalizacao,
-        COALESCE(l.endereco, 'Endereço não cadastrado') AS endereco
+    SELECT e.id AS id, e.nome AS nome, e.telefone AS telefone,
+           e.dataFinalizacao AS dataFinalizacao,
+           COALESCE(l.endereco, 'Endereço não cadastrado') AS endereco
     FROM entrevistados e
     LEFT JOIN localizacoes l ON e.id = l.entrevistadoId
     ORDER BY e.id DESC
 """)
 suspend fun buscarEntrevistadosComLocalizacao(): List<EntrevistadoComLocalizacao>
-Essa query faz um JOIN entre as tabelas entrevistados e localizacoes, permitindo mostrar os dados do entrevistado junto com o endereço.
 
-7. RespostaDao.kt
-DAO responsável por consultar e contar as respostas da pesquisa.
-
-Funções:
-
-inserir uma resposta
-contar quantas respostas existem
-apagar todas as respostas
-contar votos por categoria
-listar os 5 candidatos espontâneos mais frequentes
-listar todos os problemas
-Exemplo:
-
-Kotlin
-@Query("""
-    SELECT voto, COUNT(*) AS quantidade
-    FROM respostas
-    GROUP BY voto
-""")
+// Voto estimulado (gráfico de pizza)
+@Query("SELECT voto, COUNT(*) AS quantidade FROM respostas GROUP BY voto")
 suspend fun contagemPorVoto(): List<VotoContagem>
-Esse método permite calcular quantos votos cada opção recebeu.
 
-8. EnderecoDao.kt
-DAO para as localizações.
+// Top 5 espontâneo (gráfico de barras)
+@Query("""
+    SELECT candidatoEspontaneo AS voto, COUNT(*) AS quantidade
+    FROM respostas
+    WHERE candidatoEspontaneo != ''
+    GROUP BY candidatoEspontaneo
+    ORDER BY quantidade DESC
+    LIMIT 5
+""")
+suspend fun top5Espontaneos(): List<VotoContagem>
+```
 
-Responsabilidades:
+### Como o fluxo de dados funciona
 
-inserir localização
-apagar todos os dados de localização
-Kotlin
-@Dao
-interface EnderecoDao {
-    @Insert
-    suspend fun inserir(Localização: Endereco)
+```mermaid
+sequenceDiagram
+    participant U as Entrevistador
+    participant P as PesquisaAtual
+    participant D as DadosEntrevistadoActivity
+    participant DB as Room
+    participant R as ResultadoActivity
 
-    @Query("DELETE FROM localizacoes")
-    suspend fun deletarTodos()
-}
-9. EntrevistadoComLocalizacao.kt
-Classe que representa um dado combinando entrevistado + endereço.
+    U->>P: responde as telas (espontâneo, voto, problemas, nome, telefone)
+    U->>D: toca em Finalizar
+    D->>D: pede GPS e converte em endereço
+    D->>DB: insere Entrevistado, Resposta e Endereco
+    D->>P: limpar()
+    R->>DB: consultas de contagem
+    DB-->>R: VotoContagem
+    R->>R: monta os gráficos
+```
 
-Kotlin
-data class EntrevistadoComLocalizacao(
-    val id: Int,
-    val nome: String,
-    val telefone: String,
-    val endereco: String,
-    val dataFinalizacao: Long
-)
-Essa classe é usada para apresentação na tela de eleitores.
+Todas as operações de banco rodam em `Dispatchers.IO`, sem travar a interface.
 
-10. VotoContagem.kt
-Classe auxiliar para representar a contagem de votos ou temas.
+## 🎨 Layouts XML
 
-Kotlin
-data class VotoContagem(
-    val voto: String,
-    val quantidade: Int
-)
-Ela é utilizada para alimentar os gráficos e as estatísticas.
+| Arquivo | Descrição |
+|---|---|
+| `activity_main.xml` | Imagem central de abertura |
+| `activity_login.xml` | Campos de usuário/senha, botões e imagem |
+| `activity_admin_menu.xml` | Título, contador total e botões do painel |
+| `activity_eleitores.xml` | Botão voltar, título e `ScrollView` com o container da lista |
+| `activity_espontaneo.xml` | Campo de texto para o candidato lembrado |
+| `activity_estimulada.xml` | `MaterialCardView` dos candidatos e `RadioGroup` de Branco/Nulo/Não sei |
+| `activity_problemas.xml` | `ScrollView` com os 10 `CheckBox` |
+| `activity_dados_entrevistado.xml` | Campos de nome e telefone e botão Finalizar |
+| `activity_resultado.xml` | `ScrollView` com 2 `BarChart`, 1 `PieChart` e espaço final |
 
-Como o Room Database funciona no projeto
-O Room é uma biblioteca do Android que facilita o acesso ao SQLite de forma mais segura e organizada.
+**Recursos visuais:** `ic_seta.xml` (seta de voltar em vetor), `borda_item.xml` (borda dos itens da lista), `edittext_borda.xml`, `candidato_selecionado.xml` e imagens dos candidatos.
 
-Funcionamento no projeto
-O fluxo é o seguinte:
+## 🚀 Como executar
 
-AppDatabase.getDatabase(context) verifica se a instância do banco já existe
-Caso não exista, cria uma nova instância com Room.databaseBuilder(...)
-As entidades (Entrevistado, Resposta, Endereco) viram tabelas no banco
-Os DAOs expõem operações como inserir, contar, buscar e deletar
-As Activities acessam o banco em coroutines com Dispatchers.IO
-O aplicativo não roda operações pesadas na thread principal
-Exemplo do processo da pesquisa:
+1. Clone o repositório e abra a pasta `eleicao` no **Android Studio**
+2. Aguarde o **Gradle Sync**. O `settings.gradle.kts` precisa ter o JitPack no bloco `dependencyResolutionManagement`:
+   ```kotlin
+   maven { url = uri("https://jitpack.io") }
+   ```
+3. Rode em um emulador ou aparelho físico (Android 7.0 / API 24 ou superior)
+4. Na primeira entrevista, **aceite a permissão de localização** e mantenha o GPS ligado
+5. Entre com `admin` / `admin` para ver o painel, ou com `entrevistado` / `entrevistado` para fazer uma pesquisa
 
-o usuário responde às perguntas
-os dados ficam em PesquisaAtual
-quando finaliza, DadosEntrevistadoActivity salva:
-Entrevistado
-Resposta
-Endereco
-ResultadoActivity consulta o banco e gera gráficos
-Isso garante que os dados sejam persistidos mesmo quando o usuário fecha o app.
+> 💡 Se alterar as entidades do Room, aumente o `version` em `AppData.kt`. Como o projeto usa `fallbackToDestructiveMigration()`, o banco local é recriado (os dados de teste são perdidos).
 
-Explicação da pasta res/layout
-A pasta res/layout contém todas as telas em XML. Cada arquivo representa uma Activity e define os componentes visuais da interface.
+## ⚠️ Limitações conhecidas
 
-1. activity_main.xml
-Tela inicial de abertura.
+- Os usuários e senhas ficam fixos no código (apenas para fins didáticos)
+- O botão **Limpar dados** apaga `entrevistados` e `respostas`, mas não chama `deletarTodos()` da tabela `localizacoes`
+- A tabela `respostas` não possui `entrevistadoId`, então uma resposta não fica ligada diretamente ao entrevistado
+- Sem internet, o `Geocoder` pode não devolver o endereço; nesse caso é salvo "Endereço não identificado"
 
-Componentes:
+---
 
-ConstraintLayout: layout principal
-ImageView: imagem central da aplicação (pokemoin)
-Função:
+<div align="center">
 
-exibir a imagem de abertura do app
-2. activity_login.xml
-Tela de login.
+Projeto acadêmico em **Kotlin + Android Studio** · Feito com 💛 e muitos Pokémon
 
-Componentes:
-
-ConstraintLayout
-EditText: campos para usuário e senha
-Button: botões para acessar e sair
-TextView: títulos dos campos
-ImageView: imagem do Pokémon
-Função:
-
-autenticar o usuário
-permitir acesso ao painel administrativo ou ao fluxo de pesquisa
-3. activity_admin_menu.xml
-Menu do administrador.
-
-Componentes:
-
-ConstraintLayout
-TextView: título e contador total
-Button: opções de eleitores, resultados e limpar dados
-ImageButton: botão de voltar
-Função:
-
-centralizar as funções do painel administrativo
-4. activity_eleitores.xml
-Tela de listagem dos entrevistados.
-
-Componentes:
-
-LinearLayout: container principal vertical
-ImageButton: botão voltar
-TextView: título da tela
-ScrollView: permite rolar a lista
-LinearLayout: container dinamicamente preenchido com cada entrevistado
-Função:
-
-mostrar todos os dados cadastrados de forma rolável
-5. activity_espontaneo.xml
-Tela de pesquisa espontânea.
-
-Componentes:
-
-ConstraintLayout
-ImageButton: voltar
-TextView: títulos e instruções
-EditText: campo para digitar o nome do candidato
-Button: confirmar
-Função:
-
-coletar a primeira resposta de intenção de voto
-6. activity_estimulada.xml
-Tela de voto estimulado.
-
-Componentes:
-
-ConstraintLayout
-LinearLayout: blocos de candidatos
-MaterialCardView: cards para os candidatos
-ImageView: imagens dos Pokémon
-TextView: nomes dos candidatos
-RadioGroup
-RadioButton: branco, nulo e não sei
-Button: confirmar
-Função:
-
-permitir que o entrevistado escolha um candidato ou opção "branco/nulo/não sei"
-7. activity_problemas.xml
-Tela de seleção dos principais problemas.
-
-Componentes:
-
-ConstraintLayout
-ScrollView: necessário para rolar vários itens
-LinearLayout: layout vertical
-TextView: título da tela
-CheckBox: itens de problemas
-Button: confirmar
-Função:
-
-coletar exatamente três problemas principais escolhidos pelo entrevistado
-8. activity_dados_entrevistado.xml
-Tela de coleta de dados pessoais.
-
-Componentes:
-
-ConstraintLayout
-TextView: labels de nome e telefone
-EditText: campos para nome e telefone
-Button: finalizar pesquisa
-Função:
-
-receber os dados do entrevistado e concluir a coleta
-9. activity_resultado.xml
-Tela de relatórios.
-
-Componentes:
-
-ScrollView: para permitir a rolagem das estatísticas
-LinearLayout: empilha as partes da tela
-ImageButton: voltar
-TextView: títulos das seções
-BarChart: gráficos de barras
-PieChart: gráfico circular
-View: espaço final para ajuste visual
-Função:
-
-apresentar os resultados das pesquisas em gráficos
-Componentes visuais mais utilizados no projeto
-Durante o desenvolvimento, os layouts usam vários componentes do Android, dentre eles:
-
-TextView: textos e títulos
-EditText: entradas de texto
-Button: ações do usuário
-ImageView: imagens
-ImageButton: botão com ícone
-ScrollView: rolagem de conteúdo
-LinearLayout: organização em linha ou coluna
-ConstraintLayout: layout base
-CheckBox: seleção de múltiplos itens
-RadioGroup e RadioButton: seleção exclusiva
-MaterialCardView: cards visuais
-BarChart e PieChart: visualização de resultados
-Conclusão
-O projeto é uma aplicação Android completa de pesquisa eleitoral temática, com:
-
-fluxo de telas bem definido
-armazenamento local com Room Database
-coleta de dados em múltiplas etapas
-validações de formulário
-uso de localização do aparelho
-geração de relatórios e gráficos
-A organização foi pensada para separar claramente:
-
-interface (layout)
-regras de negócio e navegação (Activities)
-persistência de dados (data)
-Esse é um projeto de fácil manutenção e extensão, sendo ideal para estudos de Android, Kotlin, Room, persistência local e UI com componentes visuais.
-
-Observações finais
-Esse aplicativo demonstra uma arquitetura simples e funcional:
-
-o usuário percorre telas em sequência
-os dados são montados em um objeto temporário
-o banco local guarda as informações do entrevistado
-os resultados são processados e visualizados em gráficos
-
-
-
+</div>
