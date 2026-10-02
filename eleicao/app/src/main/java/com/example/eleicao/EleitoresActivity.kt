@@ -72,13 +72,13 @@ class EleitoresActivity : AppCompatActivity() {
             val bloco = LinearLayout(this)
             bloco.orientation = LinearLayout.VERTICAL
             bloco.setPadding(24, 20, 24, 20)
-            bloco.setBackgroundResource(R.drawable.borda_item) // borda em vez de card
+            bloco.setBackgroundResource(R.drawable.borda_item)
 
             val layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
-            layoutParams.setMargins(0, 0, 0, 12) // espaço entre um bloco e outro
+            layoutParams.setMargins(0, 0, 0, 12)
             bloco.layoutParams = layoutParams
 
             val nome = TextView(this)
