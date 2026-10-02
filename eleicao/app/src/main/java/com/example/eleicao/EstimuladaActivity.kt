@@ -29,7 +29,6 @@ class EstimuladaActivity : AppCompatActivity() {
         radioGroup = findViewById(R.id.radioGroupOpcoes)
         btConfirmar = findViewById(R.id.btConfirmarEstimulada)
 
-        // CANDIDATOS
         val candidatoMew = findViewById<View>(R.id.candidatoMew)
         val candidatoPikachu = findViewById<View>(R.id.candidatoPikachu)
         val candidatoCharmander = findViewById<View>(R.id.candidatoCharmander)
@@ -56,7 +55,6 @@ class EstimuladaActivity : AppCompatActivity() {
             selecionarCandidato("Squirtle", candidatoSquirtle)
         }
 
-        // BRANCO / NULO / NÃO SEI
         radioGroup.setOnCheckedChangeListener { _, checkedId ->
 
             if (checkedId != -1) {
@@ -64,8 +62,6 @@ class EstimuladaActivity : AppCompatActivity() {
                 val radioButton = findViewById<RadioButton>(checkedId)
 
                 candidatoSelecionado = radioButton.text.toString()
-
-                // Remove a seleção visual dos candidatos
                 candidatoSelecionadoView?.setBackgroundResource(
                     R.drawable.canditado_escolhido
                 )
@@ -74,7 +70,7 @@ class EstimuladaActivity : AppCompatActivity() {
             }
         }
 
-        // CONFIRMAR
+       
         btConfirmar.setOnClickListener {
 
             if (candidatoSelecionado != null) {
