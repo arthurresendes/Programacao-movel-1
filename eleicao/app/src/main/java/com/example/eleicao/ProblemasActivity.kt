@@ -77,15 +77,3 @@ class ProblemasActivity : AppCompatActivity() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
