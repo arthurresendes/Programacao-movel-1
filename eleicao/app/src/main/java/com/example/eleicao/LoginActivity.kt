@@ -20,7 +20,7 @@ class LoginActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
         etUser = findViewById<EditText>(R.id.usuario)
-        etSenha = findViewById<EditText>(R.id.usuario)
+        etSenha = findViewById<EditText>(R.id.senha)
         btAcessar = findViewById<Button>(R.id.acessar)
         btFinalizar = findViewById<Button>(R.id.finalizar)
 
