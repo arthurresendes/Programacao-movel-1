@@ -36,7 +36,8 @@ class EspontaneoActivity : AppCompatActivity() {
 
             if (candidato.isNotEmpty()) {
 
-                PesquisaAtual.candidatoEspontaneo = candidato
+                 PesquisaAtual.candidatoEspontaneo = candidato.lowercase()
+    .replaceFirstChar { it.titlecase() }
 
                 direcionando(
                     this@EspontaneoActivity,
