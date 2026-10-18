@@ -8,14 +8,17 @@ import androidx.room.Query
 @Dao
 interface ReceitaDao {
 
-    @Query("SELECT * FROM receita WHERE idFkUsuario = :idPassado")
-    suspend fun todasInformacoesReceitas(idPassado: Int)
+    @Query("SELECT * FROM receita WHERE idFkUsuario = :idPassado AND nomeMes = :mesPesquisa")
+    suspend fun todasInformacoesReceitasMes(idPassado: Int, mesPesquisa: String)
 
-    @Query("SELECT COALESCE(SUM(valor), 0.0) as total_receita FROM receita WHERE idFkUsuario = :idPassado")
-    suspend fun totalReceita(idPassado: Int)
+    @Query("SELECT * FROM receita WHERE id = :idReceita")
+    suspend fun receitaEspecifica(idReceita: Int)
 
-    @Query("SELECT nomeCategoria,COALESCE(SUM(valor), 0.0) as total_categoria FROM receita WHERE idFkUsuario = :idPassado GROUP BY nomeCategoria")
-    suspend fun totalPorCategoria(idPassado: Int)
+    @Query("SELECT COALESCE(SUM(valor), 0.0) as total_receita FROM receita WHERE idFkUsuario = :idPassado AND nomeMes = :mesPesquisa")
+    suspend fun totalReceitaMes(idPassado: Int,mesPesquisa: String)
+
+    @Query("SELECT nomeCategoria,COALESCE(SUM(valor), 0.0) as total_categoria FROM receita WHERE idFkUsuario = :idPassado AND nomeMes = :mesPesquisa GROUP BY nomeCategoria")
+    suspend fun totalPorCategoriaMes(idPassado: Int,mesPesquisa: String)
 
     @Insert
     suspend fun cadastrarReceita(receita: Receita)
