@@ -2,7 +2,7 @@ package com.example.koin.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.time.LocalDate
+import java.util.Date
 
 @Entity(tableName = "despesas")
 data class Despesas(
@@ -12,6 +12,6 @@ data class Despesas(
     val nomeCategoria: String,
     val valorDespesa: Double,
     val descricao: String?,
-    val dataDespesaCadastrada: LocalDate,
+    val dataDespesaCadastrada: Date,
     val idFkUsuario: Int
 )
