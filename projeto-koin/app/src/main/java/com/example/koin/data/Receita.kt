@@ -10,6 +10,6 @@ data class Receita(
     val nomeMes: String,
     val nomeCategoria: String,
     val valor: Double,
-    val dataReceitaCadastrada: Date,
+    val dataReceitaCadastrada: Date = Date(),
     val idFkUsuario: Int
 )
