@@ -15,7 +15,11 @@ import kotlinx.coroutines.launch
 
 class MenuActivity : AppCompatActivity() {
     private lateinit var tvNomeUsuario: TextView
+    private lateinit var tvSaldoTotal: TextView
+    private lateinit var tvReceitaMes: TextView
+    private lateinit var tvDespesaMes: TextView
     private lateinit var cardSaldo: LinearLayout
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -38,13 +42,25 @@ class MenuActivity : AppCompatActivity() {
             val total = valorReceitaUsuarioLogadoMesAtual - valorDespesaUsuarioLogadoMesAtual
 
             cardSaldo = findViewById<LinearLayout>(R.id.cardSaldo)
+            tvSaldoTotal = findViewById<TextView>(R.id.tvSaldoTotal)
+            tvReceitaMes = findViewById<TextView>(R.id.tvReceitaMes)
+            tvDespesaMes = findViewById<TextView>(R.id.tvDespesaMes)
 
             if (total > 0.0) {
                 cardSaldo.setBackgroundResource(R.drawable.fundo_saldo)
+                tvSaldoTotal.text = 0.0
+                tvReceiraMes.text = 0.0
+                tvDespesaMes.text = 0.0
             } else if(total < 0.0){
                 cardSaldo.setBackgroundResource(R.drawable.fundo_vermelho)
+                tvSaldoTotal = total
+                tvReceitaMes = valorReceitaUsuarioLogadoMesAtual
+                tvDespesaMes = valorDespesaUsuarioLogadoMesAtual
             }else{
                 cardSaldo.setBackgroundResource(R.drawable.fundo_saldo_zerado)
+                tvSaldoTotal = total
+                tvReceitaMes = valorReceitaUsuarioLogadoMesAtual
+                tvDespesaMes = valorDespesaUsuarioLogadoMesAtual
             }
         }
 
