@@ -48,7 +48,7 @@ class CadastroActivity : AppCompatActivity() {
             val nomeDigitado  =  etNome.text.toString().trim()
             val emailDigitado = etEmail.text.toString().trim()
             val senhaDigitado = etSenha.text.toString()
-            val senhaConfirmacao = etConfirmarSenha.toString()
+            val senhaConfirmacao = etConfirmarSenha.text.toString()
 
             if (nomeDigitado.isEmpty() || emailDigitado.isEmpty() || senhaDigitado.isEmpty()) {
                 Toast.makeText(this, "Preencha todos os campos!", Toast.LENGTH_SHORT).show()

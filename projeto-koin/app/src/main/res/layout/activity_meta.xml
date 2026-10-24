@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F3F6F4"
+    android:fitsSystemWindows="true">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Minhas metas"
+                        android:textColor="#26332C"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Pequenos passos, grandes conquistas."
+                        android:textColor="#89958D"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/btnNovaMeta"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:background="@drawable/botao_koin"
+                    android:gravity="center"
+                    android:text="+"
+                    android:textColor="#FFFFFF"
+                    android:textSize="30sp"
+                    android:contentDescription="Criar nova meta" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/fundo_saldo"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total guardado nas metas"
+                    android:textColor="#DCEFE6"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tvTotalGuardado"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="R$ 1.850,00"
+                    android:textColor="#FFFFFF"
+                    android:textSize="29sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvObjetivoTotal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="de R$ 5.000,00 planejados"
+                    android:textColor="#DCEFE6"
+                    android:textSize="12sp" />
+
+                <ProgressBar
+                    android:id="@+id/progressoTotalMetas"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:layout_marginTop="16dp"
+                    android:max="100"
+                    android:progress="37"
+                    android:progressTint="#FFFFFF"
+                    android:progressBackgroundTint="#55FFFFFF" />
+
+                <TextView
+                    android:id="@+id/tvPercentualTotal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="37% do objetivo total"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Seus objetivos"
+                    android:textColor="#26332C"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvVerTodasMetas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ver todas"
+                    android:textColor="#16865B"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/cardMetaCelular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/card_koin"
+                android:orientation="horizontal"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:background="@drawable/bg_icone_meta_verde"
+                    android:gravity="center"
+                    android:text="📱"
+                    android:textSize="25sp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="12dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Celular novo"
+                        android:textColor="#26332C"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvValorMetaCelular"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="R$ 1.200,00 de R$ 3.000,00"
+                        android:textColor="#89958D"
+                        android:textSize="11sp" />
+
+                    <ProgressBar
+                        android:id="@+id/progressoMetaCelular"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="7dp"
+                        android:layout_marginTop="10dp"
+                        android:max="100"
+                        android:progress="40"
+                        android:progressTint="#16865B"
+                        android:progressBackgroundTint="#E3F3E9" />
+
+                    <TextView
+                        android:id="@+id/tvPercentualMetaCelular"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="40% concluído"
+                        android:textColor="#16865B"
+                        android:textSize="11sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/cardMetaViagem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/card_koin"
+                android:orientation="horizontal"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:background="@drawable/bg_icone_meta_laranja"
+                    android:gravity="center"
+                    android:text="✈️"
+                    android:textSize="25sp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="12dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Viagem dos sonhos"
+                        android:textColor="#26332C"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvValorMetaViagem"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="R$ 650,00 de R$ 2.000,00"
+                        android:textColor="#89958D"
+                        android:textSize="11sp" />
+
+                    <ProgressBar
+                        android:id="@+id/progressoMetaViagem"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="7dp"
+                        android:layout_marginTop="10dp"
+                        android:max="100"
+                        android:progress="32"
+                        android:progressTint="#D98245"
+                        android:progressBackgroundTint="#F7E8DC" />
+
+                    <TextView
+                        android:id="@+id/tvPercentualMetaViagem"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="32,5% concluído"
+                        android:textColor="#D98245"
+                        android:textSize="11sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/cardMetaReserva"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/card_koin"
+                android:orientation="horizontal"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:background="@drawable/bg_icone_meta_azul"
+                    android:gravity="center"
+                    android:text="🛡️"
+                    android:textSize="25sp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="12dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Reserva de emergência"
+                        android:textColor="#26332C"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvValorMetaReserva"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="R$ 0,00 de R$ 2.000,00"
+                        android:textColor="#89958D"
+                        android:textSize="11sp" />
+
+                    <ProgressBar
+                        android:id="@+id/progressoMetaReserva"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="7dp"
+                        android:layout_marginTop="10dp"
+                        android:max="100"
+                        android:progress="0"
+                        android:progressTint="#5575B9"
+                        android:progressBackgroundTint="#E8EDF9" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Comece a guardar um pouco por mês."
+                        android:textColor="#5575B9"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/btnCriarMeta"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/botao_koin"
+                android:gravity="center"
+                android:text="+  Criar nova meta"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </ScrollView>
+    <LinearLayout
+        android:id="@+id/layoutNavegacao"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/barra_busca"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp">
+
+        <LinearLayout
+            android:id="@+id/navInicio"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/metas"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:contentDescription="Metas"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icone_inicio" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Início"
+                android:textColor="#16865B"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/navMovimentacoes"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/metas"
+                android:layout_width="28dp"
+                android:layout_height="30dp"
+                android:contentDescription="Metas"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icone_movimentacao" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Movimentos"
+                android:textColor="#89958D"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.9">
+
+            <TextView
+                android:id="@+id/btnAdicionarMovimento"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:background="@drawable/botao_koin"
+                android:gravity="center"
+                android:text="+"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp" />
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/navRelatorios"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/metas"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:contentDescription="Metas"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icone_relatorios" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Relatórios"
+                android:textColor="#89958D"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/navMetas"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/metas"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:contentDescription="Metas"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icone_metas" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Metas"
+                android:textColor="#89958D"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

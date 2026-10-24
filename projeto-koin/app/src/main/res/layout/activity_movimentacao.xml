@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F3F6F4"
+    android:fitsSystemWindows="true">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:clipToPadding="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="22dp"
+            android:paddingEnd="22dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="18dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Movimentações"
+                android:textColor="#26332C"
+                android:textSize="27sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Acompanhe suas entradas e despesas"
+                android:textColor="#89958D"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="23dp"
+                android:background="@drawable/barra_busca"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp">
+
+                <ImageView
+                    android:layout_width="21dp"
+                    android:layout_height="21dp"
+                    android:src="@drawable/icone_busca"
+                    android:contentDescription="Buscar"
+                    android:tint="#89958D" />
+
+                <EditText
+                    android:id="@+id/etBuscarMovimentacao"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginStart="10dp"
+                    android:background="@android:color/transparent"
+                    android:hint="Buscar movimentação"
+                    android:singleLine="true"
+                    android:inputType="text"
+                    android:textColor="#26332C"
+                    android:textColorHint="#89958D"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/filtroTodas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:background="@drawable/filtro_ativo"
+                        android:gravity="center"
+                        android:paddingStart="19dp"
+                        android:paddingEnd="19dp"
+                        android:text="Todas"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/filtroRecentes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="9dp"
+                        android:background="@drawable/filtro_inativo"
+                        android:gravity="center"
+                        android:paddingStart="19dp"
+                        android:paddingEnd="19dp"
+                        android:text="Recentes"
+                        android:textColor="#89958D"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/filtroDespesas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="9dp"
+                        android:background="@drawable/filtro_inativo"
+                        android:gravity="center"
+                        android:paddingStart="19dp"
+                        android:paddingEnd="19dp"
+                        android:text="Despesas"
+                        android:textColor="#89958D"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/filtroReceitas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="9dp"
+                        android:background="@drawable/filtro_inativo"
+                        android:gravity="center"
+                        android:paddingStart="19dp"
+                        android:paddingEnd="19dp"
+                        android:text="Receitas"
+                        android:textColor="#89958D"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="27dp"
+                android:text="Histórico"
+                android:textColor="#26332C"
+                android:textSize="19sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="10dp"
+                android:text="Hoje"
+                android:textColor="#89958D"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:id="@+id/containerMovimentacoes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/card_koin"
+                android:orientation="vertical"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="78dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="46dp"
+                        android:layout_height="46dp"
+                        android:src="@drawable/mercado_gasto"
+                        android:contentDescription="Mercado"
+                        android:scaleType="fitCenter" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="12dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Supermercado"
+                            android:textColor="#26332C"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="Alimentação"
+                            android:textColor="#89958D"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="- R$ 85,00"
+                        android:textColor="#C65353"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#EDF0ED" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="78dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="46dp"
+                        android:layout_height="46dp"
+                        android:src="@drawable/transporte_gasto"
+                        android:contentDescription="Transporte"
+                        android:scaleType="fitCenter" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="12dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Transporte"
+                            android:textColor="#26332C"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="Mobilidade"
+                            android:textColor="#89958D"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="- R$ 12,00"
+                        android:textColor="#C65353"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#EDF0ED" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="78dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="46dp"
+                        android:layout_height="46dp"
+                        android:src="@drawable/carteira"
+                        android:contentDescription="Salário"
+                        android:scaleType="fitCenter" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="12dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Salário"
+                            android:textColor="#26332C"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="Trabalho"
+                            android:textColor="#89958D"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="+ R$ 2.500,00"
+                        android:textColor="#16865B"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:layout_marginBottom="10dp"
+                android:text="Movimentações anteriores"
+                android:textColor="#89958D"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="18dp"
+                android:background="@drawable/card_koin"
+                android:gravity="center"
+                android:text="Seu histórico completo aparecerá aqui."
+                android:textColor="#89958D"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/layoutNavegacao"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/barra_busca"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp">
+
+        <LinearLayout
+            android:id="@+id/navInicio"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/metas"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:contentDescription="Metas"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icone_inicio" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Início"
+                android:textColor="#16865B"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/navMovimentacoes"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/metas"
+                android:layout_width="28dp"
+                android:layout_height="30dp"
+                android:contentDescription="Metas"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icone_movimentacao" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Movimentos"
+                android:textColor="#89958D"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.9">
+
+            <TextView
+                android:id="@+id/btnAdicionarMovimento"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:background="@drawable/botao_koin"
+                android:gravity="center"
+                android:text="+"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp" />
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/navRelatorios"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/metas"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:contentDescription="Metas"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icone_relatorios" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Relatórios"
+                android:textColor="#89958D"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/navMetas"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/metas"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:contentDescription="Metas"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icone_metas" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Metas"
+                android:textColor="#89958D"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

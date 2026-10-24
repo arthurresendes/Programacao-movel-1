@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#F3F6F4"
     android:fitsSystemWindows="true">
 
-    <!-- CONTEÚDO ROLÁVEL -->
     <ScrollView
         android:id="@+id/scrollConteudoHome"
         android:layout_width="match_parent"
@@ -25,7 +25,6 @@
             android:paddingTop="16dp"
             android:paddingBottom="16dp">
 
-            <!-- CABEÇALHO -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -39,9 +38,10 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tvNomeUsuario"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Olá, usuário!"
+                        android:text="Olá,!"
                         android:textColor="#89958D"
                         android:textSize="14sp" />
 
@@ -69,8 +69,8 @@
 
             </LinearLayout>
 
-            <!-- CARTÃO DE SALDO -->
             <LinearLayout
+                android:id="@+id/cardSaldo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -96,11 +96,11 @@
                         android:id="@+id/btnVisibilidadeSaldo"
                         android:layout_width="28dp"
                         android:layout_height="28dp"
+                        android:contentDescription="Visibilidade do saldo"
                         android:gravity="center"
                         android:text="◉"
                         android:textColor="#FFFFFF"
-                        android:textSize="18sp"
-                        android:contentDescription="Visibilidade do saldo" />
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 
@@ -181,14 +181,12 @@
 
             </LinearLayout>
 
-            <!-- RESUMO DE ENTRADAS E SAÍDAS -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:orientation="horizontal">
 
-                <!-- ENTRADAS -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -235,7 +233,6 @@
 
                 </LinearLayout>
 
-                <!-- SAÍDAS -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -284,7 +281,6 @@
 
             </LinearLayout>
 
-            <!-- TÍTULO DAS MOVIMENTAÇÕES -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -312,7 +308,6 @@
 
             </LinearLayout>
 
-            <!-- LISTA DE MOVIMENTAÇÕES -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="238dp"
@@ -322,7 +317,6 @@
                 android:paddingStart="14dp"
                 android:paddingEnd="14dp">
 
-                <!-- SUPERMERCADO -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="78dp"
@@ -378,7 +372,6 @@
                     android:layout_height="1dp"
                     android:background="#EDF0ED" />
 
-                <!-- TRANSPORTE -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="74dp"
@@ -434,7 +427,6 @@
                     android:layout_height="1dp"
                     android:background="#EDF0ED" />
 
-                <!-- SALÁRIO -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="74dp"
@@ -491,7 +483,6 @@
 
     </ScrollView>
 
-    <!-- BARRA DE NAVEGAÇÃO FIXA -->
     <LinearLayout
         android:id="@+id/layoutNavegacao"
         android:layout_width="match_parent"
@@ -506,7 +497,6 @@
         android:paddingStart="4dp"
         android:paddingEnd="4dp">
 
-        <!-- INÍCIO -->
         <LinearLayout
             android:id="@+id/navInicio"
             android:layout_width="0dp"
@@ -533,7 +523,6 @@
 
         </LinearLayout>
 
-        <!-- MOVIMENTOS -->
         <LinearLayout
             android:id="@+id/navMovimentacoes"
             android:layout_width="0dp"
@@ -559,7 +548,6 @@
 
         </LinearLayout>
 
-        <!-- ADICIONAR MOVIMENTAÇÃO -->
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -578,7 +566,6 @@
 
         </FrameLayout>
 
-        <!-- RELATÓRIOS -->
         <LinearLayout
             android:id="@+id/navRelatorios"
             android:layout_width="0dp"
@@ -604,7 +591,6 @@
 
         </LinearLayout>
 
-        <!-- METAS -->
         <LinearLayout
             android:id="@+id/navMetas"
             android:layout_width="0dp"

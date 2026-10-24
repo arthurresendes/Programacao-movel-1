@@ -14,6 +14,7 @@ import com.example.koin.data.AppDatabase
 import com.example.koin.data.DadosEntrePaginas
 import com.example.koin.security.GerenciadorSeguranca
 import com.example.koin.utils.direcionando
+import com.example.koin.utils.voltando
 import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
@@ -64,6 +65,7 @@ class LoginActivity : AppCompatActivity() {
                     DadosEntrePaginas.nome = validacao.nome
                     DadosEntrePaginas.email = validacao.email
                     direcionando(this@LoginActivity, MenuActivity::class.java)
+                    voltando()
                 }
             }
         }

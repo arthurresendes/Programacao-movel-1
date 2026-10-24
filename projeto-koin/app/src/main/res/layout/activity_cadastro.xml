@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F3F6F4"
@@ -11,13 +12,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- CABEÇALHO VERDE -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="244dp"
-            android:background="@drawable/fundo_koin"
+            android:background="@drawable/fundo_koin_img"
             android:gravity="center"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:padding="28dp">
 
 
@@ -51,8 +51,6 @@
 
         </LinearLayout>
 
-        <!-- FORMULÁRIO BRANCO -->
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="512dp"
@@ -64,8 +62,6 @@
             android:paddingTop="30dp"
             android:paddingEnd="26dp"
             android:paddingBottom="32dp">
-
-            <!-- Nome Completo-->
 
             <EditText
                 android:id="@+id/etNome"
@@ -84,7 +80,6 @@
                 android:textColorHint="#89958D"
                 android:textSize="15sp" />
 
-            <!-- E-MAIL -->
             <EditText
                 android:id="@+id/etEmail"
                 android:layout_width="match_parent"
@@ -102,7 +97,6 @@
                 android:textColorHint="#89958D"
                 android:textSize="15sp" />
 
-            <!-- SENHA -->
             <EditText
                 android:id="@+id/etSenha"
                 android:layout_width="match_parent"
@@ -120,7 +114,6 @@
                 android:textColorHint="#89958D"
                 android:textSize="15sp" />
 
-            <!-- Confirmar SENHA -->
             <EditText
                 android:id="@+id/etConfirmarSenha"
                 android:layout_width="match_parent"
@@ -139,10 +132,8 @@
                 android:textSize="15sp" />
 
 
-            <!-- BOTÃO ENTRAR -->
-
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnCriar"
+                android:id="@+id/btnEntrar"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="24dp"
@@ -157,7 +148,6 @@
                 android:textStyle="bold" />
 
 
-            <!-- DIVISOR -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -165,14 +155,12 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <!-- BARRA -->
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_weight="1"
                     android:background="#E0E7E1" />
 
-                <!-- OU -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -182,7 +170,6 @@
                     android:textColor="#89958D"
                     android:textSize="13sp" />
 
-                <!-- BARRA -->
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1dp"
@@ -191,7 +178,6 @@
 
             </LinearLayout>
 
-            <!-- CRIAR CONTA -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -222,7 +208,6 @@
 
         </LinearLayout>
 
-        <!-- RODAPÉ -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
