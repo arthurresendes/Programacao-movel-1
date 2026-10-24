@@ -3,6 +3,7 @@ package com.example.koin
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.koin.data.AppDatabase
+import com.example.koin.data.DadosEntrePaginas
 import com.example.koin.security.GerenciadorSeguranca
 import com.example.koin.utils.direcionando
 import kotlinx.coroutines.launch
@@ -17,6 +19,7 @@ import kotlinx.coroutines.launch
 class LoginActivity : AppCompatActivity() {
     private lateinit var etEmail: EditText
     private lateinit var etSenha: EditText
+    private lateinit var tvCadastro: TextView
     private lateinit var btAcessar: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +29,15 @@ class LoginActivity : AppCompatActivity() {
 
         val db = AppDatabase.getDatabase(this)
         val userDao = db.usuarioDao()
+
+        etEmail = findViewById<EditText>(R.id.etEmail)
+        etSenha = findViewById<EditText>(R.id.etSenha)
+        btAcessar = findViewById<Button>(R.id.btnEntrar)
+        tvCadastro = findViewById<TextView>(R.id.tvCriarConta)
+
+        tvCadastro.setOnClickListener {
+            direcionando(this@LoginActivity, CadastroActivity::class.java)
+        }
 
         btAcessar.setOnClickListener(){
             val emailDigitado = etEmail.text.toString().trim()
@@ -47,6 +59,10 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(applicationContext, "E-mail ou senha inválidos! Tente novamente", Toast.LENGTH_SHORT).show()
                     btAcessar.isEnabled = true
                 }else{
+                    DadosEntrePaginas.limpar()
+                    DadosEntrePaginas.id = validacao.id.toLong()
+                    DadosEntrePaginas.nome = validacao.nome
+                    DadosEntrePaginas.email = validacao.email
                     direcionando(this@LoginActivity, MenuActivity::class.java)
                 }
             }

@@ -3,6 +3,7 @@ package com.example.koin
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +20,9 @@ class CadastroActivity : AppCompatActivity() {
     private lateinit var etNome: EditText
     private lateinit var etEmail: EditText
     private lateinit var etSenha: EditText
+    private lateinit var etConfirmarSenha: EditText
+    private lateinit var tvEntrar: TextView
+
     private lateinit var btCadastrar: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,13 +33,30 @@ class CadastroActivity : AppCompatActivity() {
         val db = AppDatabase.getDatabase(this)
         val userDao = db.usuarioDao()
 
+        etNome= findViewById<EditText>(R.id.etNome)
+        etEmail = findViewById<EditText>(R.id.etEmail)
+        etSenha = findViewById<EditText>(R.id.etSenha)
+        etConfirmarSenha = findViewById<EditText>(R.id.etConfirmarSenha)
+        btCadastrar = findViewById<Button>(R.id.btnEntrar)
+        tvEntrar = findViewById<TextView>(R.id.tvLogar)
+
+        tvEntrar.setOnClickListener {
+            direcionando(this@CadastroActivity, LoginActivity::class.java)
+        }
+
         btCadastrar.setOnClickListener(){
             val nomeDigitado  =  etNome.text.toString().trim()
             val emailDigitado = etEmail.text.toString().trim()
             val senhaDigitado = etSenha.text.toString()
+            val senhaConfirmacao = etConfirmarSenha.toString()
 
             if (nomeDigitado.isEmpty() || emailDigitado.isEmpty() || senhaDigitado.isEmpty()) {
                 Toast.makeText(this, "Preencha todos os campos!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if(senhaDigitado != senhaConfirmacao){
+                Toast.makeText(this, "As senhas tem que ser iguais!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
