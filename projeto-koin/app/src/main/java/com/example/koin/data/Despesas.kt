@@ -12,6 +12,6 @@ data class Despesas(
     val nomeCategoria: String,
     val valorDespesa: Double,
     val descricao: String?,
-    val dataDespesaCadastrada: Date,
+    val dataDespesaCadastrada: Date = Date(),
     val idFkUsuario: Int
 )
