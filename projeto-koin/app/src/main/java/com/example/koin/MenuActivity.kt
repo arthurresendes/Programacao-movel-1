@@ -12,8 +12,6 @@ import com.example.koin.data.AppDatabase
 import com.example.koin.data.DadosEntrePaginas
 import com.example.koin.utils.obterMesAtualPorExtenso
 import kotlinx.coroutines.launch
-import java.text.NumberFormat
-import java.util.Locale
 
 class MenuActivity : AppCompatActivity() {
     private lateinit var tvNomeUsuario: TextView
@@ -54,9 +52,9 @@ class MenuActivity : AppCompatActivity() {
             }
             cardSaldo.setBackgroundResource(fundo)
 
-            tvSaldoTotal.text = total.toString()
-            tvReceitaMes.text = receitaMes.toString()
-            tvDespesaMes.text = despesaMes.toString()
+            tvSaldoTotal.text = "R$ %.2f".format(total)
+            tvReceitaMes.text = "R$ %.2f".format(receitaMes)
+            tvDespesaMes.text = "R$ %.2f".format(despesaMes)
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
