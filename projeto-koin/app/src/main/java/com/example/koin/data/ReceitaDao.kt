@@ -22,6 +22,25 @@ interface ReceitaDao {
     @Query("SELECT nomeCategoria,COALESCE(SUM(valor), 0.0) as total_categoria FROM receita WHERE idFkUsuario = :idPassado AND nomeMes = :mesPesquisa GROUP BY nomeCategoria")
     suspend fun totalPorCategoriaMes(idPassado: Int,mesPesquisa: String) : TotalCategoria?
 
+    @Query("""
+    SELECT * FROM (
+        SELECT id, nomeMes, nomeCategoria, valor, idFkUsuario,
+               dataReceitaCadastrada AS data_transacao, 'receita' AS tipo
+        FROM receita
+        WHERE idFkUsuario = :user_id
+
+        UNION ALL
+
+        SELECT id, nomeMes, nomeCategoria, valorDespesa AS valor, idFkUsuario,
+               dataDespesaCadastrada AS data_transacao, 'despesa' AS tipo
+        FROM despesas
+        WHERE idFkUsuario = :user_id
+    ) AS transacoes_misturadas
+    ORDER BY data_transacao DESC, id DESC
+    LIMIT 3
+    """)
+    suspend fun ultimasTransacoes(user_id: Int): List<UltimaTransacao>
+
     @Insert
     suspend fun cadastrarReceita(receita: Receita)
 
