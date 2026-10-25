@@ -56,7 +56,7 @@
 
                 </LinearLayout>
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/ivFotoPerfil"
                     android:layout_width="38dp"
                     android:layout_height="38dp"
@@ -218,10 +218,10 @@
                             android:textSize="11sp" />
 
                         <TextView
+                            android:id="@+id/tvEntradas"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="3dp"
-                            android:text="R$ 4.200,00"
                             android:textColor="#26332C"
                             android:textSize="11sp"
                             android:textStyle="bold" />
@@ -264,10 +264,10 @@
                             android:textSize="11sp" />
 
                         <TextView
+                            android:id="@+id/tvSaidas"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="3dp"
-                            android:text="R$ 750,00"
                             android:textColor="#C65353"
                             android:textSize="11sp"
                             android:textStyle="bold" />

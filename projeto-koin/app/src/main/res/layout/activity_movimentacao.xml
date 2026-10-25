@@ -23,21 +23,49 @@
             android:paddingTop="24dp"
             android:paddingBottom="18dp">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Movimentações"
-                android:textColor="#26332C"
-                android:textSize="27sp"
-                android:textStyle="bold" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Acompanhe suas entradas e despesas"
-                android:textColor="#89958D"
-                android:textSize="14sp" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:text="Movimentações"
+                        android:textColor="#26332C"
+                        android:textSize="26sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvAcompanhamento"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Acompanhe suas entradas e despesa"
+                        android:textColor="#89958D"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/ivFotoPerfil"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/icone_perfil"
+                    android:contentDescription="Foto do usuário"
+                    android:padding="2dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/icone_perfil" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -122,19 +150,6 @@
                         android:textColor="#89958D"
                         android:textSize="13sp" />
 
-                    <TextView
-                        android:id="@+id/filtroReceitas"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="9dp"
-                        android:background="@drawable/filtro_inativo"
-                        android:gravity="center"
-                        android:paddingStart="19dp"
-                        android:paddingEnd="19dp"
-                        android:text="Receitas"
-                        android:textColor="#89958D"
-                        android:textSize="13sp" />
-
                 </LinearLayout>
 
             </HorizontalScrollView>
@@ -153,7 +168,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="10dp"
-                android:text="Hoje"
+                android:text="Últimas 3 transações"
                 android:textColor="#89958D"
                 android:textSize="13sp"
                 android:textStyle="bold" />
@@ -377,13 +392,13 @@
                 android:layout_height="30dp"
                 android:contentDescription="Metas"
                 android:scaleType="fitCenter"
-                android:src="@drawable/icone_inicio" />
+                android:src="@drawable/icone_inicio_desativo" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Início"
-                android:textColor="#16865B"
+                android:textColor="#89958D"
                 android:textSize="13sp"
                 android:textStyle="bold" />
 
@@ -403,13 +418,13 @@
                 android:layout_height="30dp"
                 android:contentDescription="Metas"
                 android:scaleType="fitCenter"
-                android:src="@drawable/icone_movimentacao" />
+                android:src="@drawable/icone_movimentacao_ativo" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Movimentos"
-                android:textColor="#89958D"
+                android:textColor="#16865B"
                 android:textSize="13sp" />
 
         </LinearLayout>

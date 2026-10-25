@@ -51,16 +51,16 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/btnNovaMeta"
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
-                    android:background="@drawable/botao_koin"
-                    android:gravity="center"
-                    android:text="+"
-                    android:textColor="#FFFFFF"
-                    android:textSize="30sp"
-                    android:contentDescription="Criar nova meta" />
+                <ImageButton
+                    android:id="@+id/ivFotoPerfil"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/icone_perfil"
+                    android:contentDescription="Foto do usuário"
+                    android:padding="2dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/icone_perfil" />
 
             </LinearLayout>
 
@@ -134,15 +134,6 @@
                     android:text="Seus objetivos"
                     android:textColor="#26332C"
                     android:textSize="17sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tvVerTodasMetas"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ver todas"
-                    android:textColor="#16865B"
-                    android:textSize="12sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -384,13 +375,13 @@
                 android:layout_height="30dp"
                 android:contentDescription="Metas"
                 android:scaleType="fitCenter"
-                android:src="@drawable/icone_inicio" />
+                android:src="@drawable/icone_inicio_desativo" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Início"
-                android:textColor="#16865B"
+                android:textColor="#89958D"
                 android:textSize="13sp"
                 android:textStyle="bold" />
 
@@ -478,13 +469,13 @@
                 android:layout_height="30dp"
                 android:contentDescription="Metas"
                 android:scaleType="fitCenter"
-                android:src="@drawable/icone_metas" />
+                android:src="@drawable/icone_meta_ativo" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Metas"
-                android:textColor="#89958D"
+                android:textColor="#16865B"
                 android:textSize="13sp" />
 
         </LinearLayout>

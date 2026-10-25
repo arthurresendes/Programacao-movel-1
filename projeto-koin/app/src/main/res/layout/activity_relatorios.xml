@@ -25,14 +25,42 @@
             android:paddingTop="14dp"
             android:paddingBottom="16dp">
 
-            <TextView
-                android:id="@+id/tvTituloRelatorios"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Relatórios"
-                android:textColor="#26332C"
-                android:textSize="23sp"
-                android:textStyle="bold" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvTituloRelatorios"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:text="Relatórios"
+                        android:textColor="#26332C"
+                        android:textSize="26sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/ivFotoPerfil"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/icone_perfil"
+                    android:contentDescription="Foto do usuário"
+                    android:padding="2dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/icone_perfil" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/layoutFiltroPeriodo"
@@ -537,13 +565,13 @@
                 android:layout_height="30dp"
                 android:contentDescription="Metas"
                 android:scaleType="fitCenter"
-                android:src="@drawable/icone_inicio" />
+                android:src="@drawable/icone_inicio_desativo" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Início"
-                android:textColor="#16865B"
+                android:textColor="#89958D"
                 android:textSize="13sp"
                 android:textStyle="bold" />
 
@@ -606,13 +634,13 @@
                 android:layout_height="30dp"
                 android:contentDescription="Metas"
                 android:scaleType="fitCenter"
-                android:src="@drawable/icone_relatorios" />
+                android:src="@drawable/icone_relatorio_ativo" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Relatórios"
-                android:textColor="#89958D"
+                android:textColor="#16865B"
                 android:textSize="13sp" />
 
         </LinearLayout>
