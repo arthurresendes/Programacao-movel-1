@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import com.example.koin.data.response.TodasInformacaoReceita
 import com.example.koin.data.response.TotalCategoria
+import com.example.koin.data.response.UltimaTransacao
 
 @Dao
 interface ReceitaDao {
