@@ -125,7 +125,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/filtroRecentes"
+                        android:id="@+id/filtroReceitas"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:layout_marginStart="9dp"
@@ -133,7 +133,7 @@
                         android:gravity="center"
                         android:paddingStart="19dp"
                         android:paddingEnd="19dp"
-                        android:text="Recentes"
+                        android:text="Receitas"
                         android:textColor="#89958D"
                         android:textSize="13sp" />
 
