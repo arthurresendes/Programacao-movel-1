@@ -10,7 +10,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.koin.R
-import com.example.koin.data.UltimaTransacao
+import com.example.koin.data.response.UltimaTransacao
 import java.text.SimpleDateFormat
 import java.util.Locale
 
