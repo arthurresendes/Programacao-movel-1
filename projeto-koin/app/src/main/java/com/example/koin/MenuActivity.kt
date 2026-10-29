@@ -13,6 +13,7 @@ import com.example.koin.data.AppDatabase
 import com.example.koin.data.DadosEntrePaginas
 import com.example.koin.utils.direcionando
 import com.example.koin.utils.obterMesAtualPorExtenso
+import com.example.koin.utils.renderizarTransacoes
 import kotlinx.coroutines.launch
 
 class MenuActivity : AppCompatActivity() {
@@ -30,6 +31,7 @@ class MenuActivity : AppCompatActivity() {
     private lateinit var relatorios: LinearLayout
     private lateinit var metas: LinearLayout
     private lateinit var verTodasMovimentacoes: TextView
+    private lateinit var containerUltimas: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +52,7 @@ class MenuActivity : AppCompatActivity() {
         adicionarDespesaReceita = findViewById<TextView>(R.id.btnAdicionarMovimento)
         metas = findViewById<LinearLayout>(R.id.navMetas)
         verTodasMovimentacoes = findViewById<TextView>(R.id.tvVerTodas)
+        containerUltimas = findViewById<LinearLayout>(R.id.containerUltimas)
 
         perfil.setOnClickListener {
             direcionando(this@MenuActivity, PerfilActivity::class.java)
@@ -71,37 +74,40 @@ class MenuActivity : AppCompatActivity() {
         }
 
         tvNomeUsuario.text = "Olá, ${DadosEntrePaginas.nome}!"
-
+    
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+    }
+     override fun onResume() {
+        super.onResume()
+        val idUsuario = (DadosEntrePaginas.id ?: 0L).toInt()
         val db = AppDatabase.getDatabase(this)
         val receitaDao = db.receitaDao()
         val despesaDao = db.despesasDao()
-
-        val mesAtual = obterMesAtualPorExtenso()
-        val idUsuario = (DadosEntrePaginas.id ?: 0L).toInt()
-
+        val transacaoDao = db.transacaoDao()
+        
         lifecycleScope.launch {
+            renderizarTransacoes(this@MenuActivity, containerUltimas, transacaoDao.ultimasTransacoes(idUsuario))
+            val mesAtual = obterMesAtualPorExtenso()
             val receitaMes = receitaDao.totalReceitaMes(idUsuario, mesAtual)
             val despesaMes = despesaDao.totalDespesaMes(idUsuario, mesAtual)
             val total = receitaMes - despesaMes
-
+    
             val fundo = when {
                 total > 0.0 -> R.drawable.fundo_saldo
                 total < 0.0 -> R.drawable.fundo_vermelho
                 else -> R.drawable.fundo_saldo_zerado
             }
             cardSaldo.setBackgroundResource(fundo)
-
+    
             tvSaldoTotal.text = "R$ %.2f".format(total)
             tvReceitaMes.text = "R$ %.2f".format(receitaMes)
             tvDespesaMes.text = "R$ %.2f".format(despesaMes)
             tvEntrada.text = "R$ %.2f".format(receitaMes)
             tvSaida.text = "R$ %.2f".format(despesaMes)
-        }
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
         }
     }
 }
