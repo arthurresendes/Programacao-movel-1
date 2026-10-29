@@ -90,7 +90,7 @@ class MenuActivity : AppCompatActivity() {
         val transacaoDao = db.transacaoDao()
         
         lifecycleScope.launch {
-            renderizarTransacoes(this@MenuActivity, containerUltimas, transacaoDao.ultimasTransacoes(idUsuario))
+            renderizarTransacoes(this@MenuActivity, containerUltimas, transacaoDao.listar(idUsuario, "todas", "", 3))
             val mesAtual = obterMesAtualPorExtenso()
             val receitaMes = receitaDao.totalReceitaMes(idUsuario, mesAtual)
             val despesaMes = despesaDao.totalDespesaMes(idUsuario, mesAtual)
