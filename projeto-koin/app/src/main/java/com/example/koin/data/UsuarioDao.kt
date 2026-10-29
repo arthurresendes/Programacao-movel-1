@@ -14,11 +14,8 @@ interface UsuarioDao {
     suspend fun inserir (usuario: Usuario)
 
     @Query("DELETE FROM usuario WHERE id = :usuarioId")
-    suspend fun deletarTodos(usuarioId: Int) : Int
+    suspend fun deletar(usuarioId: Int) : Int
 
     @Query("UPDATE usuario SET senha = :novaSenha WHERE id = :usuarioId")
     suspend fun atualizarSenha(novaSenha: String, usuarioId: Int) : Int
-
-    @Query("UPDATE usuario SET email =:novoEmail WHERE id =:usuarioId")
-    suspend fun atualizarEmail(novoEmail: String, usuarioId: Int) : Int
 }
