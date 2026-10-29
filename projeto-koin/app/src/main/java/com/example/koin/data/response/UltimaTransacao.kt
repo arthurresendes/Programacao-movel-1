@@ -8,6 +8,7 @@ data class UltimaTransacao(
     val nomeMes: String,
     val nomeCategoria: String,
     val valor: Double,
+    val descricao: String?,
     val idFkUsuario: Int,
     @ColumnInfo(name = "data_transacao") val dataTransacao: Date,
     val tipo: String
