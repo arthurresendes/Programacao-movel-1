@@ -33,8 +33,13 @@ fun renderizarTransacoes(context: Context, container: LinearLayout, lista: List<
     val inflater = LayoutInflater.from(context)
     lista.forEachIndexed { i, t ->
         val item = inflater.inflate(R.layout.item_movimentacao, container, false)
-
-        item.findViewById<ImageView>(R.id.ivCategoria).setImageResource(iconeDaCategoria(t.nomeCategoria))
+        val icone = item.findViewById<ImageView>(R.id.ivCategoria)
+        val recurso = iconeDaCategoria(t.nomeCategoria)
+        if (recurso != null) {
+            icone.setImageResource(recurso)
+        } else {
+            icone.setImageDrawable(null)
+        }
         item.findViewById<TextView>(R.id.tvTitulo).text = t.nomeCategoria
         item.findViewById<TextView>(R.id.tvSubtitulo).text = formatoData.format(t.dataTransacao)
 
@@ -52,10 +57,10 @@ fun renderizarTransacoes(context: Context, container: LinearLayout, lista: List<
     }
 }
 
-fun iconeDaCategoria(categoria: String): Int =
+fun iconeDaCategoria(categoria: String): Int? =
     when (categoria.trim().lowercase()) {
         "alimentação", "alimentacao", "mercado", "supermercado" -> R.drawable.mercado_gasto
         "transporte", "mobilidade" -> R.drawable.transporte_gasto
         "salário", "salario", "trabalho" -> R.drawable.carteira
-        else -> R.drawable.carteira
+        else -> null
     }
