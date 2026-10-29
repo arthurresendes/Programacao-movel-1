@@ -40,7 +40,8 @@ class MovimentacaoActivity : AppCompatActivity() {
     private var jobTop3: Job? = null
     private var jobLista: Job? = null
 
-    private val dao by lazy { AppDatabase.getDatabase(this).transacaoDao() }
+    private val db = AppDatabase.getDatabase(this)
+    private val receitaDao = db.receitaDao()
     private val idUsuario: Int get() = (DadosEntrePaginas.id ?: 0L).toInt()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -130,7 +131,7 @@ class MovimentacaoActivity : AppCompatActivity() {
     private fun carregarTop3() {
         jobTop3?.cancel()
         jobTop3 = lifecycleScope.launch {
-            val lista = dao.listar(idUsuario, tipoAtual, "", 3)
+            val lista = receitaDao.listar(idUsuario, tipoAtual, "", 3)
             renderizarTransacoes(this@MovimentacaoActivity, containerTop3, lista)
         }
     }
@@ -139,7 +140,7 @@ class MovimentacaoActivity : AppCompatActivity() {
         val busca = etBuscar.text.toString().trim()
         jobLista?.cancel()
         jobLista = lifecycleScope.launch {
-            val lista = dao.listar(idUsuario, tipoAtual, busca, -1)
+            val lista = receitaDao.listar(idUsuario, tipoAtual, busca, -1)
             renderizarAgrupadoPorData(this@MovimentacaoActivity, containerTodas, lista)
         }
     }
