@@ -75,7 +75,7 @@ class PerfilActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 deletandoConta(id)
                 Toast.makeText(this@PerfilActivity, "Deleção executada com sucesso!", Toast.LENGTH_SHORT).show()
-                direcionando(this@PerfilActivity, CadastroActivity::class.java)
+                direcionandoLimpandoSessao(this@PerfilActivity, CadastroActivity::class.java)
             }
         }
         builder.setNegativeButton("Não") { dialog, which ->

@@ -30,6 +30,10 @@ class EditarSenhaActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_editar_senha)
 
+        alterarSenha = findViewById(R.id.btAlterarSenha)
+        etSenha = findViewById(R.id.etSenha)
+        etConfirmarSenha = findViewById(R.id.etConfirmarSenha)
+
         val id = (DadosEntrePaginas.id ?: 0L).toInt()
         val db = AppDatabase.getDatabase(this)
         val usuario = db.usuarioDao()
