@@ -40,8 +40,7 @@ class MovimentacaoActivity : AppCompatActivity() {
     private var jobTop3: Job? = null
     private var jobLista: Job? = null
 
-    private val db = AppDatabase.getDatabase(this)
-    private val transacaoDao = db.transacaoDao()
+    private val transacaoDao by lazy { AppDatabase.getDatabase(this).transacaoDao() }
     private val idUsuario: Int get() = (DadosEntrePaginas.id ?: 0L).toInt()
 
     override fun onCreate(savedInstanceState: Bundle?) {

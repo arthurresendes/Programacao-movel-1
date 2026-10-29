@@ -19,6 +19,9 @@ class VerInformcoesContaActivity : AppCompatActivity() {
         val email = DadosEntrePaginas.email
         val nome = DadosEntrePaginas.nome
 
+        tvNome = findViewById<TextView>(R.id.tvNome)
+        tvEmail = findViewById<TextView>(R.id.tvEmail)
+
         tvNome.text = "Olá ${nome}"
         tvEmail.text = "Seu email: ${email}"
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

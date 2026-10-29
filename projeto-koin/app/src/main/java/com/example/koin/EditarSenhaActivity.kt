@@ -11,7 +11,9 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.koin.data.AppDatabase
 import com.example.koin.data.DadosEntrePaginas
+import com.example.koin.security.GerenciadorSeguranca
 import com.example.koin.utils.direcionando
+import com.example.koin.utils.direcionandoLimpandoSessao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -29,11 +31,10 @@ class EditarSenhaActivity : AppCompatActivity() {
         setContentView(R.layout.activity_editar_senha)
 
         val id = (DadosEntrePaginas.id ?: 0L).toInt()
+        val db = AppDatabase.getDatabase(this)
+        val usuario = db.usuarioDao()
 
         alterarSenha.setOnClickListener {
-            val db = AppDatabase.getDatabase(this)
-            val usuario = db.usuarioDao()
-
             val senha  =  etSenha.text.toString().trim()
             val confirmarSenha = etConfirmarSenha.text.toString().trim()
             if (senha.isEmpty() || confirmarSenha.isEmpty()) {
@@ -41,17 +42,19 @@ class EditarSenhaActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            if (senha == confirmarSenha) {
-                lifecycleScope.launch {
-                    withContext(Dispatchers.IO) {
-                        usuario.atualizarSenha(senha, id)
-                    }
-                    Toast.makeText(this@EditarSenhaActivity, "Senha atualizada com sucesso!", Toast.LENGTH_SHORT).show()
-                    delay(2000)
-                    direcionando(this@EditarSenhaActivity, LoginActivity::class.java)
-                }
-            } else {
+            if (senha != confirmarSenha) {
                 Toast.makeText(this, "Senhas diferentes!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            alterarSenha.isEnabled = false
+            val senhaCriptografada = GerenciadorSeguranca.criptografar(senha)
+
+            lifecycleScope.launch {
+                usuario.atualizarSenha(senhaCriptografada, id)
+                Toast.makeText(this@EditarSenhaActivity, "Senha atualizada com sucesso!", Toast.LENGTH_SHORT).show()
+                delay(1500)
+                direcionandoLimpandoSessao(this@EditarSenhaActivity, LoginActivity::class.java)
             }
 
             }

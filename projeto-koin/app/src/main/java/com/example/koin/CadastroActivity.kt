@@ -1,5 +1,6 @@
 package com.example.koin
 
+import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -14,6 +15,8 @@ import com.example.koin.data.AppDatabase
 import com.example.koin.data.Usuario
 import com.example.koin.security.GerenciadorSeguranca
 import com.example.koin.utils.direcionando
+import com.example.koin.utils.fecharSessao
+import com.example.koin.utils.saindo
 import kotlinx.coroutines.launch
 
 class CadastroActivity : AppCompatActivity() {
@@ -42,6 +45,7 @@ class CadastroActivity : AppCompatActivity() {
 
         tvEntrar.setOnClickListener {
             direcionando(this@CadastroActivity, LoginActivity::class.java)
+            fecharSessao()
         }
 
         btCadastrar.setOnClickListener(){
@@ -71,11 +75,15 @@ class CadastroActivity : AppCompatActivity() {
                     senha = criptografarSenha
                 )
 
-                try{
+                try {
                     userDao.inserir(usuario)
                     Toast.makeText(applicationContext, "Cadastro realizado com sucesso!", Toast.LENGTH_SHORT).show()
                     direcionando(this@CadastroActivity, LoginActivity::class.java)
-                }catch(e : Exception){
+                    finish()
+                } catch (e: SQLiteConstraintException) {
+                    Toast.makeText(applicationContext, "Este e-mail já está cadastrado!", Toast.LENGTH_SHORT).show()
+                    btCadastrar.isEnabled = true
+                } catch (e: Exception) {
                     Toast.makeText(applicationContext, "Erro ao conectar ao banco de dados.", Toast.LENGTH_SHORT).show()
                     btCadastrar.isEnabled = true
                 }

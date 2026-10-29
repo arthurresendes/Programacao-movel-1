@@ -13,11 +13,14 @@ import androidx.lifecycle.lifecycleScope
 import com.example.koin.data.AppDatabase
 import com.example.koin.data.DadosEntrePaginas
 import com.example.koin.utils.direcionando
+import com.example.koin.utils.direcionandoLimpandoSessao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class PerfilActivity : AppCompatActivity() {
+    private lateinit var tvNomePerfil: TextView
+    private lateinit var tvEmailPerfil: TextView
     private lateinit var editarSenha: TextView
     private lateinit var verInformacoes: LinearLayout
     private lateinit var sairConta: TextView
@@ -28,12 +31,16 @@ class PerfilActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_perfil)
 
+        tvNomePerfil = findViewById(R.id.tvNomePerfil)
+        tvEmailPerfil = findViewById(R.id.tvEmailPerfil)
         editarSenha = findViewById<TextView>(R.id.btEditarSenha)
         verInformacoes = findViewById<LinearLayout>(R.id.llDadosPessoais)
         sairConta = findViewById<TextView>(R.id.btSairConta)
         deletarConta = findViewById<TextView>(R.id.btDeletarConta)
 
         val id = (DadosEntrePaginas.id ?: 0L).toInt()
+        tvNomePerfil.text = DadosEntrePaginas.nome
+        tvEmailPerfil.text = DadosEntrePaginas.email
 
         editarSenha.setOnClickListener {
             direcionando(this@PerfilActivity, EditarSenhaActivity::class.java)
@@ -44,7 +51,7 @@ class PerfilActivity : AppCompatActivity() {
         }
 
         sairConta.setOnClickListener {
-            direcionando(this@PerfilActivity, LoginActivity::class.java)
+            direcionandoLimpandoSessao(this@PerfilActivity, LoginActivity::class.java)
         }
 
         deletarConta.setOnClickListener {
