@@ -199,7 +199,7 @@
                         android:layout_height="32dp"
                         android:background="#DDF3E7"
                         android:gravity="center"
-                        android:text="↓"
+                        android:text="↗"
                         android:textColor="#16865B"
                         android:textSize="21sp" />
 
@@ -245,7 +245,7 @@
                         android:layout_height="32dp"
                         android:background="#FCE8E6"
                         android:gravity="center"
-                        android:text="↗"
+                        android:text="↓"
                         android:textColor="#C65353"
                         android:textSize="20sp" />
 
