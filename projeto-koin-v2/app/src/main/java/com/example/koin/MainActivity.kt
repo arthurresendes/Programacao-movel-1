@@ -7,8 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.koin.utils.direcionando
-import com.example.koin.utils.fecharSessao
-import com.example.koin.utils.saindo
+import com.example.koin.utils.voltando
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -20,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             delay(3000)
             direcionando(this@MainActivity, LoginActivity::class.java)
-            fecharSessao()
+            voltando()
         }
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())

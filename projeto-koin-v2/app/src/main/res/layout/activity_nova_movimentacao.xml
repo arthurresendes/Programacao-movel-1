@@ -57,7 +57,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/filtro_ativo"
+                android:background="@drawable/funco_saldo_negativo"
                 android:gravity="center"
                 android:text="Despesa"
                 android:textColor="#FFFFFF"

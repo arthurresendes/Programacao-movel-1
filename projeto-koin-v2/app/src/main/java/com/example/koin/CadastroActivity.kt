@@ -14,10 +14,14 @@ import androidx.lifecycle.lifecycleScope
 import com.example.koin.data.AppDatabase
 import com.example.koin.data.Usuario
 import com.example.koin.security.GerenciadorSeguranca
+import com.example.koin.utils.TAMANHO_MINIMO_SENHA
 import com.example.koin.utils.direcionando
-import com.example.koin.utils.fecharSessao
-import com.example.koin.utils.saindo
+import com.example.koin.utils.emailValido
+import com.example.koin.utils.senhaValida
+import com.example.koin.utils.voltando
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CadastroActivity : AppCompatActivity() {
     private lateinit var etNome: EditText
@@ -45,7 +49,7 @@ class CadastroActivity : AppCompatActivity() {
 
         tvEntrar.setOnClickListener {
             direcionando(this@CadastroActivity, LoginActivity::class.java)
-            fecharSessao()
+            voltando()
         }
 
         btCadastrar.setOnClickListener(){
@@ -59,20 +63,32 @@ class CadastroActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            if(senhaDigitado != senhaConfirmacao){
+            if (!emailValido(emailDigitado)) {
+                Toast.makeText(this, "Digite um e-mail válido!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (!senhaValida(senhaDigitado)) {
+                Toast.makeText(this, "A senha precisa ter pelo menos $TAMANHO_MINIMO_SENHA caracteres!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (senhaDigitado != senhaConfirmacao) {
                 Toast.makeText(this, "As senhas tem que ser iguais!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             btCadastrar.isEnabled = false
 
-            val criptografarSenha = GerenciadorSeguranca.criptografar(senhaDigitado)
-
             lifecycleScope.launch {
+                val senhaComHash = withContext(Dispatchers.Default) {
+                    GerenciadorSeguranca.gerarHash(senhaDigitado)
+                }
+
                 val usuario = Usuario(
                     nome = nomeDigitado,
-                    email = emailDigitado,
-                    senha = criptografarSenha
+                    email = emailDigitado.lowercase(),
+                    senha = senhaComHash
                 )
 
                 try {

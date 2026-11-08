@@ -236,7 +236,7 @@
                 android:layout_height="30dp"
                 android:contentDescription="Inicio"
                 android:scaleType="fitCenter"
-                android:src="@drawable/icone_inicio_desativo" />
+                android:src="@drawable/icone_inicio_inativo" />
 
             <TextView
                 android:layout_width="wrap_content"

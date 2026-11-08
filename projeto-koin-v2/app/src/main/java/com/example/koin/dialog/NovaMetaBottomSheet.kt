@@ -1,5 +1,4 @@
-
-package com.example.koin
+package com.example.koin.dialog
 
 import android.os.Bundle
 import android.text.Editable
@@ -16,6 +15,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import com.example.koin.R
 import com.example.koin.data.AppDatabase
 import com.example.koin.data.DadosEntrePaginas
 import com.example.koin.data.Meta
@@ -213,7 +213,7 @@ class NovaMetaBottomSheet : BottomSheetDialogFragment() {
                 }
             }
 
-            viewsIcones += item
+            viewsIcones.add(item)
             container.addView(item)
         }
 

@@ -1,5 +1,4 @@
-
-package com.example.koin
+package com.example.koin.dialog
 
 import android.graphics.Color
 import android.os.Bundle
@@ -13,6 +12,7 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import com.example.koin.R
 import com.example.koin.data.AppDatabase
 import com.example.koin.data.DadosEntrePaginas
 import com.example.koin.data.Meta
@@ -69,10 +69,10 @@ class GuardarMetaBottomSheet : BottomSheetDialogFragment() {
         valorAlvo = args.getLong(ARG_ALVO)
         modoRetirar = savedInstanceState?.getBoolean(CHAVE_MODO) ?: false
 
-        etValor = view.findViewById(R.id.etValorGuardar)
-        tvModoGuardar = view.findViewById(R.id.tvModoGuardar)
-        tvModoRetirar = view.findViewById(R.id.tvModoRetirar)
-        btConfirmar = view.findViewById(R.id.btConfirmarGuardar)
+        etValor = view.findViewById<EditText>(R.id.etValorGuardar)
+        tvModoGuardar = view.findViewById<TextView>(R.id.tvModoGuardar)
+        tvModoRetirar = view.findViewById<TextView>(R.id.tvModoRetirar)
+        btConfirmar = view.findViewById<TextView>(R.id.btConfirmarGuardar)
 
         view.findViewById<TextView>(R.id.tvIconeGuardar).apply {
             text = args.getString(ARG_ICONE)
@@ -260,8 +260,28 @@ class GuardarMetaBottomSheet : BottomSheetDialogFragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             try {
-                val linhas = AppDatabase.getDatabase(requireContext())
-                    .metaDao()
+                val db = AppDatabase.getDatabase(requireContext())
+
+                if (!modoRetirar) {
+                    val disponivel = db.receitaDao().totalReceitas(idUsuario) -
+                            db.despesasDao().totalDespesas(idUsuario) -
+                            db.metaDao().totalGuardado(idUsuario)
+
+                    if (valor > disponivel) {
+                        if (!isAdded) return@launch
+                        btConfirmar.isEnabled = true
+                        etValor.error =
+                            if (disponivel <= 0L) {
+                                "Você não tem saldo disponível para guardar"
+                            } else {
+                                "Saldo disponível: ${formatarMoeda(disponivel)}"
+                            }
+                        etValor.requestFocus()
+                        return@launch
+                    }
+                }
+
+                val linhas = db.metaDao()
                     .ajustarValorGuardado(metaId, idUsuario, delta)
 
                 if (!isAdded) return@launch

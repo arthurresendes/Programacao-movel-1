@@ -8,7 +8,4 @@ fun paraCentavos(valor: String): Long {
     return digitos.toLongOrNull() ?: 0L
 }
 
-fun paraDecimal(centavos: Long): java.math.BigDecimal {
-    return java.math.BigDecimal.valueOf(centavos, 2)
-}
 }

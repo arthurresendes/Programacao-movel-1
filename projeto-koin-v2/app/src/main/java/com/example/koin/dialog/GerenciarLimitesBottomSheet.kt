@@ -1,5 +1,4 @@
-
-package com.example.koin
+package com.example.koin.dialog
 
 import android.os.Bundle
 import android.text.Editable
@@ -16,6 +15,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.room.withTransaction
+import com.example.koin.R
 import com.example.koin.data.AppDatabase
 import com.example.koin.data.DadosEntrePaginas
 import com.example.koin.data.Orcamento
@@ -330,7 +330,7 @@ class GerenciarLimitesBottomSheet : BottomSheetDialogFragment() {
 
             if (texto.isEmpty()) {
                 if (existente != null) {
-                    paraRemover += categoria
+                    paraRemover.add(categoria)
                 }
                 continue
             }
@@ -346,7 +346,7 @@ class GerenciarLimitesBottomSheet : BottomSheetDialogFragment() {
 
             if (valorCentavos <= 0L) {
                 if (existente != null) {
-                    paraRemover += categoria
+                    paraRemover.add(categoria)
                 }
                 continue
             }
@@ -357,11 +357,13 @@ class GerenciarLimitesBottomSheet : BottomSheetDialogFragment() {
                 return
             }
 
-            paraSalvar += Orcamento(
-                id = existente?.id ?: 0,
-                nomeCategoria = categoria,
-                valorLimite = valorCentavos,
-                idFkUsuario = idUsuario
+            paraSalvar.add(
+                Orcamento(
+                    id = existente?.id ?: 0,
+                    nomeCategoria = categoria,
+                    valorLimite = valorCentavos,
+                    idFkUsuario = idUsuario
+                )
             )
         }
 

@@ -15,7 +15,9 @@ import com.example.koin.data.DadosEntrePaginas
 import com.example.koin.security.GerenciadorSeguranca
 import com.example.koin.utils.direcionando
 import com.example.koin.utils.voltando
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var etEmail: EditText
@@ -51,19 +53,20 @@ class LoginActivity : AppCompatActivity() {
 
             btAcessar.isEnabled = false
 
-            val senhaCriptografada = GerenciadorSeguranca.criptografar(senhaDigitado)
-
             lifecycleScope.launch {
-                val validacao = userDao.logar(emailDigitado, senhaCriptografada)
+                val usuario = userDao.buscarPorEmail(emailDigitado.lowercase())
+                val senhaConfere = usuario != null && withContext(Dispatchers.Default) {
+                    GerenciadorSeguranca.verificar(senhaDigitado, usuario.senha)
+                }
 
-                if (validacao == null){
+                if (usuario == null || !senhaConfere) {
                     Toast.makeText(applicationContext, "E-mail ou senha inválidos! Tente novamente", Toast.LENGTH_SHORT).show()
                     btAcessar.isEnabled = true
-                }else{
+                } else {
                     DadosEntrePaginas.limpar()
-                    DadosEntrePaginas.id = validacao.id.toLong()
-                    DadosEntrePaginas.nome = validacao.nome
-                    DadosEntrePaginas.email = validacao.email
+                    DadosEntrePaginas.id = usuario.id.toLong()
+                    DadosEntrePaginas.nome = usuario.nome
+                    DadosEntrePaginas.email = usuario.email
                     direcionando(this@LoginActivity, MenuActivity::class.java)
                     voltando()
                 }

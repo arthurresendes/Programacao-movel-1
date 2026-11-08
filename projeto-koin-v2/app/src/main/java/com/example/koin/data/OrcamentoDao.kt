@@ -14,21 +14,8 @@ interface OrcamentoDao {
         ORDER BY nomeCategoria ASC""")
     suspend fun listarOrcamentos(idUsuario: Int): List<Orcamento>
 
-    @Query("""
-        SELECT COALESCE(SUM(valorLimite), 0.0)
-        FROM orcamento
-        WHERE idFkUsuario = :idUsuario""")
-    suspend fun totalLimites(idUsuario: Int): Double
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun salvarOrcamento(orcamento: Orcamento)
-
-    @Query("""
-        DELETE FROM orcamento
-        WHERE id = :idOrcamento
-        AND idFkUsuario = :idUsuario""")
-    suspend fun excluirOrcamento(idOrcamento: Int, idUsuario: Int)
-
 
     @Query("""
         DELETE FROM orcamento

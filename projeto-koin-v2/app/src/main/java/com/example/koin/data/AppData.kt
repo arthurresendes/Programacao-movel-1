@@ -14,7 +14,7 @@ import androidx.room.TypeConverters
         Orcamento::class,
         Meta::class
     ],
-    version = 10,
+    version = 11,
     exportSchema = false
 )
 @TypeConverters(Converters::class)

@@ -14,6 +14,7 @@ import com.example.koin.data.AppDatabase
 import com.example.koin.data.DadosEntrePaginas
 import com.example.koin.utils.direcionando
 import com.example.koin.utils.direcionandoLimpandoSessao
+import com.example.koin.utils.exigirSessao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -32,14 +33,15 @@ class PerfilActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_perfil)
+        if (!exigirSessao()) return
 
-        tvNomePerfil = findViewById(R.id.tvNomePerfil)
-        tvEmailPerfil = findViewById(R.id.tvEmailPerfil)
+        tvNomePerfil = findViewById<TextView>(R.id.tvNomePerfil)
+        tvEmailPerfil = findViewById<TextView>(R.id.tvEmailPerfil)
         editarSenha = findViewById<TextView>(R.id.btEditarSenha)
         verInformacoes = findViewById<LinearLayout>(R.id.llDadosPessoais)
         sairConta = findViewById<TextView>(R.id.btSairConta)
         deletarConta = findViewById<TextView>(R.id.btDeletarConta)
-        btFechar = findViewById(R.id.btFechar)
+        btFechar = findViewById<TextView>(R.id.btFechar)
         btFechar.setOnClickListener { finish() }
 
         val id = (DadosEntrePaginas.id ?: 0L).toInt()

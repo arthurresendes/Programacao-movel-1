@@ -9,6 +9,7 @@ import android.text.TextUtils
 import android.view.Gravity
 import android.view.View
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -21,8 +22,6 @@ import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
-import java.text.NumberFormat
-import java.util.Locale
 import com.example.koin.data.AppDatabase
 import com.example.koin.data.DadosEntrePaginas
 import com.example.koin.data.response.TotalCategoria
@@ -32,8 +31,10 @@ import kotlinx.coroutines.launch
 import java.util.Calendar
 import java.util.Date
 import android.widget.Toast
+import com.example.koin.dialog.GerenciarLimitesBottomSheet
 import com.example.koin.utils.FormatadorMonetario
 import com.example.koin.utils.corDaCategoria
+import com.example.koin.utils.exigirSessao
 import com.example.koin.utils.periodoDoMesAtual
 
 class RelatoriosActivity : AppCompatActivity() {
@@ -62,6 +63,7 @@ class RelatoriosActivity : AppCompatActivity() {
     private lateinit var btFiltroMes: TextView
     private lateinit var btFiltroTrimestre: TextView
     private lateinit var btFiltroAno: TextView
+    private lateinit var tvSetaSaldo: TextView
 
     private var tipoAtual = TIPO_MES
 
@@ -69,26 +71,27 @@ class RelatoriosActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_relatorios)
+        if (!exigirSessao()) return
 
 
         tipoAtual = savedInstanceState?.getString(CHAVE_TIPO) ?: TIPO_MES
-        tvRelatorioReceitas = findViewById(R.id.tvRelatorioReceitas)
-        tvRelatorioDespesas = findViewById(R.id.tvRelatorioDespesas)
-        tvRelatorioSaldo = findViewById(R.id.tvRelatorioSaldo)
+        tvRelatorioReceitas = findViewById<TextView>(R.id.tvRelatorioReceitas)
+        tvRelatorioDespesas = findViewById<TextView>(R.id.tvRelatorioDespesas)
+        tvRelatorioSaldo = findViewById<TextView>(R.id.tvRelatorioSaldo)
+        tvSetaSaldo = findViewById<TextView>(R.id.tvSetaSaldo)
 
+        perfil = findViewById<ImageButton>(R.id.ivFotoPerfil)
+        inicio = findViewById<LinearLayout>(R.id.navInicio)
+        movimentacao = findViewById<LinearLayout>(R.id.navMovimentacoes)
+        adicionarDespesaReceita = findViewById<TextView>(R.id.btnAdicionarMovimento)
+        metas = findViewById<LinearLayout>(R.id.navMetas)
 
-        perfil = findViewById(R.id.ivFotoPerfil)
-        inicio = findViewById(R.id.navInicio)
-        movimentacao = findViewById(R.id.navMovimentacoes)
-        adicionarDespesaReceita = findViewById(R.id.btnAdicionarMovimento)
-        metas = findViewById(R.id.navMetas)
+        chartDespesas = findViewById<PieChart>(R.id.chartDespesas)
+        btGerenciarLimites = findViewById<TextView>(R.id.btGerenciarLimites)
 
-        chartDespesas = findViewById(R.id.chartDespesas)
-        btGerenciarLimites = findViewById(R.id.btGerenciarLimites)
-
-        btFiltroMes = findViewById(R.id.btFiltroMes)
-        btFiltroTrimestre = findViewById(R.id.btFiltroTrimestre)
-        btFiltroAno = findViewById(R.id.btFiltroAno)
+        btFiltroMes = findViewById<TextView>(R.id.btFiltroMes)
+        btFiltroTrimestre = findViewById<TextView>(R.id.btFiltroTrimestre)
+        btFiltroAno = findViewById<TextView>(R.id.btFiltroAno)
 
 
         configurarGraficoDespesas()
@@ -292,6 +295,7 @@ class RelatoriosActivity : AppCompatActivity() {
 
                 tvRelatorioSaldo.text = FormatadorMonetario.formatar(saldo.toLong())
 
+                atualizarIndicadorSaldo(saldo >= 0.0)
 
                 val categorias = dao.totalPorCategoriaPeriodo(
                     idUsuario,
@@ -313,7 +317,17 @@ class RelatoriosActivity : AppCompatActivity() {
         }
     }
 
-
+    private fun atualizarIndicadorSaldo(positivo: Boolean) {
+        if (positivo) {
+            tvSetaSaldo.text = "↗"
+            tvSetaSaldo.setTextColor(Color.parseColor("#16865B"))
+            tvRelatorioSaldo.setTextColor(Color.parseColor("#16865B"))
+        } else {
+            tvSetaSaldo.text = "↓"
+            tvSetaSaldo.setTextColor(Color.parseColor("#C65353"))
+            tvRelatorioSaldo.setTextColor(Color.parseColor("#C65353"))
+        }
+    }
 
     private fun obterPeriodo(tipo: String): Pair<Date, Date> {
 

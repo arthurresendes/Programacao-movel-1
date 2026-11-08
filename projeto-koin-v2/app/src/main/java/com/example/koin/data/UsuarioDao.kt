@@ -2,13 +2,14 @@ package com.example.koin.data
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.koin.data.response.InfoLogado
-
 @Dao
 interface UsuarioDao {
 
-    @Query("SELECT id,nome,email FROM usuario WHERE email = :emailPassada AND senha = :senhaPassada")
-    suspend fun logar(emailPassada: String, senhaPassada: String) : InfoLogado?
+    @Query("SELECT * FROM usuario WHERE email = :emailPassado LIMIT 1")
+    suspend fun buscarPorEmail(emailPassado: String): Usuario?
+
+    @Query("SELECT senha FROM usuario WHERE id = :usuarioId")
+    suspend fun buscarSenhaPorId(usuarioId: Int): String?
 
     @Insert
     suspend fun inserir (usuario: Usuario)

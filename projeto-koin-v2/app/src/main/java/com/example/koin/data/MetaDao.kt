@@ -18,6 +18,9 @@ interface MetaDao {
     @Query("SELECT COUNT(*) FROM meta WHERE idFkUsuario = :idUsuario")
     suspend fun contar(idUsuario: Int): Int
 
+    @Query("SELECT COALESCE(SUM(valorGuardado), 0) FROM meta WHERE idFkUsuario = :idUsuario")
+    suspend fun totalGuardado(idUsuario: Int): Long
+
     @Insert
     suspend fun inserir(meta: Meta)
 
@@ -25,7 +28,6 @@ interface MetaDao {
         SET valorGuardado = MAX(0, valorGuardado + :delta)
         WHERE id = :id AND idFkUsuario = :idUsuario""")
     suspend fun ajustarValorGuardado(id: Int, idUsuario: Int, delta: Long): Int
-
     @Query("""UPDATE meta
         SET nome = :nome, valorAlvo = :valorAlvo, icone = :icone, prazo = :prazo
         WHERE id = :id AND idFkUsuario = :idUsuario""")

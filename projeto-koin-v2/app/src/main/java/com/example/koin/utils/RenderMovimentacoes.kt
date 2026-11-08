@@ -21,7 +21,8 @@ private fun criarLinha(
     inflater: LayoutInflater,
     container: LinearLayout,
     t: UltimaTransacao,
-    mostrarDivisor: Boolean
+    mostrarDivisor: Boolean,
+    aoExcluir: ((UltimaTransacao) -> Unit)? = null
 ): View {
     val item = inflater.inflate(R.layout.item_movimentacao, container, false)
 
@@ -42,6 +43,12 @@ private fun criarLinha(
     } else {
         tvValor.text = "+ $valorFormatado"
         tvValor.setTextColor(Color.parseColor("#16865B"))
+    }
+
+    val botaoExcluir = item.findViewById<ImageView>(R.id.ivExcluir)
+    if (aoExcluir != null) {
+        botaoExcluir.visibility = View.VISIBLE
+        botaoExcluir.setOnClickListener { aoExcluir(t) }
     }
 
     if (!mostrarDivisor) item.findViewById<View>(R.id.divisor).visibility = View.GONE
@@ -68,7 +75,12 @@ fun renderizarTransacoes(context: Context, container: LinearLayout, lista: List<
     }
 }
 
-fun renderizarAgrupadoPorData(context: Context, container: LinearLayout, lista: List<UltimaTransacao>) {
+fun renderizarAgrupadoPorData(
+    context: Context,
+    container: LinearLayout,
+    lista: List<UltimaTransacao>,
+    aoExcluir: (UltimaTransacao) -> Unit
+) {
     container.removeAllViews()
     if (lista.isEmpty()) {
         container.addView(mensagemVazia(context))
@@ -87,7 +99,7 @@ fun renderizarAgrupadoPorData(context: Context, container: LinearLayout, lista: 
         }
         container.addView(titulo)
         itens.forEachIndexed { i, t ->
-            container.addView(criarLinha(inflater, container, t, i != itens.lastIndex))
+            container.addView(criarLinha(inflater, container, t, i != itens.lastIndex, aoExcluir))
         }
     }
 }

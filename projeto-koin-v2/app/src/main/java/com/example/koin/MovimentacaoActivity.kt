@@ -9,14 +9,19 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.koin.data.AppDatabase
 import com.example.koin.data.DadosEntrePaginas
+import com.example.koin.data.response.UltimaTransacao
+import com.example.koin.utils.FormatadorMonetario
 import com.example.koin.utils.direcionando
+import com.example.koin.utils.exigirSessao
 import com.example.koin.utils.renderizarAgrupadoPorData
 import com.example.koin.utils.renderizarTransacoes
 import kotlinx.coroutines.Job
@@ -47,19 +52,20 @@ class MovimentacaoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_movimentacao)
+        if (!exigirSessao()) return
 
-        perfil = findViewById(R.id.ivFotoPerfil)
-        inicio = findViewById(R.id.navInicio)
-        relatorios = findViewById(R.id.navRelatorios)
-        adicionarDespesaReceita = findViewById(R.id.btnAdicionarMovimento)
-        metas = findViewById(R.id.navMetas)
+        perfil = findViewById<ImageButton>(R.id.ivFotoPerfil)
+        inicio = findViewById<LinearLayout>(R.id.navInicio)
+        relatorios = findViewById<LinearLayout>(R.id.navRelatorios)
+        adicionarDespesaReceita = findViewById<TextView>(R.id.btnAdicionarMovimento)
+        metas = findViewById<LinearLayout>(R.id.navMetas)
 
-        etBuscar = findViewById(R.id.etBuscarMovimentacao)
-        containerTop3 = findViewById(R.id.containerMovimentacoes)
-        containerTodas = findViewById(R.id.containerTodas)
-        filtroTodas = findViewById(R.id.filtroTodas)
-        filtroReceitas = findViewById(R.id.filtroReceitas)
-        filtroDespesas = findViewById(R.id.filtroDespesas)
+        etBuscar = findViewById<EditText>(R.id.etBuscarMovimentacao)
+        containerTop3 = findViewById<LinearLayout>(R.id.containerMovimentacoes)
+        containerTodas = findViewById<LinearLayout>(R.id.containerTodas)
+        filtroTodas = findViewById<TextView>(R.id.filtroTodas)
+        filtroReceitas = findViewById<TextView>(R.id.filtroReceitas)
+        filtroDespesas = findViewById<TextView>(R.id.filtroDespesas)
 
         perfil.setOnClickListener {
             direcionando(this@MovimentacaoActivity, PerfilActivity::class.java)
@@ -140,7 +146,59 @@ class MovimentacaoActivity : AppCompatActivity() {
         jobLista?.cancel()
         jobLista = lifecycleScope.launch {
             val lista = transacaoDao.listar(idUsuario, tipoAtual, busca, -1)
-            renderizarAgrupadoPorData(this@MovimentacaoActivity, containerTodas, lista)
+            renderizarAgrupadoPorData(this@MovimentacaoActivity, containerTodas, lista) {
+                confirmarExclusao(it)
+            }
+        }
+    }
+
+    private fun confirmarExclusao(transacao: UltimaTransacao) {
+        val nome = transacao.descricao?.takeIf { it.isNotBlank() } ?: transacao.nomeCategoria
+        val tipoTexto = if (transacao.tipo == "despesa") "despesa" else "receita"
+
+        val dialogo = AlertDialog.Builder(this)
+            .setTitle("Excluir movimentação")
+            .setMessage(
+                "Deseja excluir a $tipoTexto \"$nome\" de ${FormatadorMonetario.formatar(transacao.valor)}? Essa ação não pode ser desfeita."
+            )
+            .setNegativeButton("Cancelar", null)
+            .setPositiveButton("Excluir") { _, _ ->
+                excluirTransacao(transacao)
+            }
+            .create()
+
+        dialogo.show()
+
+        dialogo.getButton(AlertDialog.BUTTON_POSITIVE)
+            .setTextColor(Color.parseColor("#C0392B"))
+    }
+
+    private fun excluirTransacao(transacao: UltimaTransacao) {
+        if (idUsuario == 0) {
+            Toast.makeText(this, "Sessão expirada. Faça login novamente.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        lifecycleScope.launch {
+            try {
+                val db = AppDatabase.getDatabase(this@MovimentacaoActivity)
+                val linhas = if (transacao.tipo == "despesa") {
+                    db.despesasDao().excluirDespesa(transacao.id, idUsuario)
+                } else {
+                    db.receitaDao().excluirReceita(transacao.id, idUsuario)
+                }
+
+                if (linhas == 0) {
+                    Toast.makeText(this@MovimentacaoActivity, "Movimentação não encontrada.", Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(this@MovimentacaoActivity, "Movimentação excluída.", Toast.LENGTH_SHORT).show()
+                }
+
+                carregarTop3()
+                carregarLista()
+            } catch (e: Exception) {
+                Toast.makeText(this@MovimentacaoActivity, "Não foi possível excluir a movimentação.", Toast.LENGTH_LONG).show()
+            }
         }
     }
 }

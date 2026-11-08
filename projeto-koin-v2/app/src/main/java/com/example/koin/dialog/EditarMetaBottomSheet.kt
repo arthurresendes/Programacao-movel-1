@@ -1,5 +1,4 @@
-
-package com.example.koin
+package com.example.koin.dialog
 
 import android.os.Bundle
 import android.text.Editable
@@ -16,6 +15,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import com.example.koin.R
 import com.example.koin.data.AppDatabase
 import com.example.koin.data.DadosEntrePaginas
 import com.example.koin.data.Meta
@@ -71,9 +71,9 @@ class EditarMetaBottomSheet : BottomSheetDialogFragment() {
             ?: args.getString(ARG_ICONE)
                     ?: NovaMetaBottomSheet.ICONES.first()
 
-        etNome = view.findViewById(R.id.etNomeMeta)
-        etValor = view.findViewById(R.id.etValorMeta)
-        btSalvar = view.findViewById(R.id.btCriarMetaSheet)
+        etNome = view.findViewById<EditText>(R.id.etNomeMeta)
+        etValor = view.findViewById<EditText>(R.id.etValorMeta)
+        btSalvar = view.findViewById<TextView>(R.id.btCriarMetaSheet)
 
 
         configurarMascaraMonetaria()
@@ -251,7 +251,7 @@ class EditarMetaBottomSheet : BottomSheetDialogFragment() {
                 }
             }
 
-            viewsIcones += item
+            viewsIcones.add(item)
             container.addView(item)
         }
 

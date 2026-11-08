@@ -22,6 +22,7 @@ import com.example.koin.data.Despesas
 import com.example.koin.data.Receita
 import com.example.koin.utils.Categorias
 import com.example.koin.utils.ConverterValor
+import com.example.koin.utils.exigirSessao
 import com.example.koin.utils.iconeDaCategoria
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointBackward
@@ -141,6 +142,7 @@ class NovaMovimentacaoActivity : AppCompatActivity() {
 
         enableEdgeToEdge()
         setContentView(R.layout.activity_nova_movimentacao)
+        if (!exigirSessao()) return
 
 
         tipoAtual = savedInstanceState?.getString(CHAVE_TIPO) ?: TIPO_DESPESA
@@ -153,24 +155,24 @@ class NovaMovimentacaoActivity : AppCompatActivity() {
                 ?: dataSelecionada
 
 
-        btFechar = findViewById(R.id.btFechar)
-        btDespesa = findViewById(R.id.btDespesa)
-        btReceita = findViewById(R.id.btReceita)
+        btFechar = findViewById<TextView>(R.id.btFechar)
+        btDespesa = findViewById<TextView>(R.id.btDespesa)
+        btReceita = findViewById<TextView>(R.id.btReceita)
 
-        tvRotuloValor = findViewById(R.id.tvRotuloValor)
-        cardValor = findViewById(R.id.cardValor)
+        tvRotuloValor = findViewById<TextView>(R.id.tvRotuloValor)
+        cardValor = findViewById<LinearLayout>(R.id.cardValor)
 
-        etValor = findViewById(R.id.etValor)
-        etDescricao = findViewById(R.id.etDescricao)
+        etValor = findViewById<EditText>(R.id.etValor)
+        etDescricao = findViewById<EditText>(R.id.etDescricao)
 
-        btCategoria = findViewById(R.id.btCategoria)
-        tvCategoriaSelecionada = findViewById(R.id.tvCategoriaSelecionada)
-        ivIconeCategoria = findViewById(R.id.ivIconeCategoria)
+        btCategoria = findViewById<LinearLayout>(R.id.btCategoria)
+        tvCategoriaSelecionada = findViewById<TextView>(R.id.tvCategoriaSelecionada)
+        ivIconeCategoria = findViewById<ImageView>(R.id.ivIconeCategoria)
 
-        btData = findViewById(R.id.btData)
-        tvDataSelecionada = findViewById(R.id.tvDataSelecionada)
+        btData = findViewById<LinearLayout>(R.id.btData)
+        tvDataSelecionada = findViewById<TextView>(R.id.tvDataSelecionada)
 
-        btSalvar = findViewById(R.id.btSalvarMovimentacao)
+        btSalvar = findViewById<TextView>(R.id.btSalvarMovimentacao)
 
 
 
@@ -268,11 +270,10 @@ class NovaMovimentacaoActivity : AppCompatActivity() {
 
 
     private fun atualizarTipoNaTela() {
-
         val ehDespesa = tipoAtual == TIPO_DESPESA
 
-        marcarAba(btDespesa, ativa = ehDespesa)
-        marcarAba(btReceita, ativa = !ehDespesa)
+        marcarAba(btDespesa, ativa = ehDespesa, fundoAtivo = R.drawable.fundo_vermelho)
+        marcarAba(btReceita, ativa = !ehDespesa, fundoAtivo = R.drawable.fundo_saldo)
 
         tvRotuloValor.text =
             if (ehDespesa) "Valor da despesa" else "Valor da receita"
@@ -280,67 +281,40 @@ class NovaMovimentacaoActivity : AppCompatActivity() {
         etDescricao.hint =
             if (ehDespesa) "Ex.: Compra no supermercado" else "Ex.: Caiu o Salário"
 
-
         cardValor.animate().cancel()
-
+        cardValor.setBackgroundResource(
+            if (ehDespesa) R.drawable.fundo_vermelho else R.drawable.fundo_saldo
+        )
+        cardValor.alpha = 0.5f
         cardValor.animate()
-            .alpha(0.5f)
-            .setDuration(120)
-            .withEndAction {
-
-                cardValor.setBackgroundResource(
-                    if (ehDespesa) {
-                        R.drawable.fundo_vermelho
-                    } else {
-                        R.drawable.fundo_saldo
-                    }
-                )
-
-                cardValor.animate()
-                    .alpha(1f)
-                    .setDuration(180)
-                    .start()
-            }
+            .alpha(1f)
+            .setDuration(180)
             .start()
     }
 
-
-    private fun marcarAba(aba: TextView, ativa: Boolean) {
-
+    private fun marcarAba(aba: TextView, ativa: Boolean, fundoAtivo: Int) {
         aba.animate().cancel()
 
+        if (ativa) {
+            aba.setBackgroundResource(fundoAtivo)
+            aba.setTextColor(Color.WHITE)
+            aba.setTypeface(null, Typeface.BOLD)
+        } else {
+            aba.setBackgroundResource(R.drawable.filtro_inativo)
+            aba.setTextColor(Color.parseColor("#536159"))
+            aba.setTypeface(null, Typeface.NORMAL)
+        }
+
+        aba.scaleX = 0.96f
+        aba.scaleY = 0.96f
+        aba.alpha = 0.65f
         aba.animate()
-            .scaleX(0.96f)
-            .scaleY(0.96f)
-            .alpha(0.65f)
+            .scaleX(1f)
+            .scaleY(1f)
+            .alpha(1f)
             .setDuration(100)
-            .withEndAction {
-
-                if (ativa) {
-
-                    aba.setBackgroundResource(R.drawable.filtro_ativo)
-                    aba.setTextColor(Color.WHITE)
-                    aba.setTypeface(null, Typeface.BOLD)
-
-                } else {
-
-                    aba.setBackgroundResource(R.drawable.filtro_inativo)
-                    aba.setTextColor(Color.parseColor("#536159"))
-                    aba.setTypeface(null, Typeface.NORMAL)
-                }
-
-                aba.animate()
-                    .scaleX(1f)
-                    .scaleY(1f)
-                    .alpha(1f)
-                    .setDuration(180)
-                    .start()
-            }
             .start()
     }
-
-
-
 
     private fun abrirSeletorDeCategoria() {
 

@@ -21,7 +21,11 @@ import androidx.lifecycle.lifecycleScope
 import com.example.koin.data.AppDatabase
 import com.example.koin.data.DadosEntrePaginas
 import com.example.koin.data.Meta
+import com.example.koin.dialog.EditarMetaBottomSheet
+import com.example.koin.dialog.GuardarMetaBottomSheet
+import com.example.koin.dialog.NovaMetaBottomSheet
 import com.example.koin.utils.direcionando
+import com.example.koin.utils.exigirSessao
 import com.example.koin.utils.infoDoPrazo
 import com.example.koin.utils.temaDaMeta
 import kotlinx.coroutines.launch
@@ -60,20 +64,21 @@ class MetaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_meta)
+        if (!exigirSessao()) return
 
-        perfil = findViewById(R.id.ivFotoPerfil)
-        inicio = findViewById(R.id.navInicio)
-        relatorios = findViewById(R.id.navRelatorios)
-        adicionarDespesaReceita = findViewById(R.id.btnAdicionarMovimento)
-        movimetacao = findViewById(R.id.navMovimentacoes)
+        perfil = findViewById<ImageButton>(R.id.ivFotoPerfil)
+        inicio = findViewById<LinearLayout>(R.id.navInicio)
+        relatorios = findViewById<LinearLayout>(R.id.navRelatorios)
+        adicionarDespesaReceita = findViewById<TextView>(R.id.btnAdicionarMovimento)
+        movimetacao = findViewById<LinearLayout>(R.id.navMovimentacoes)
 
-        btnCriarMeta = findViewById(R.id.btnCriarMeta)
-        containerMetas = findViewById(R.id.containerMetas)
-        tvSemMetas = findViewById(R.id.tvSemMetas)
-        tvTotalGuardado = findViewById(R.id.tvTotalGuardado)
-        tvObjetivoTotal = findViewById(R.id.tvObjetivoTotal)
-        progressoTotalMetas = findViewById(R.id.progressoTotalMetas)
-        tvPercentualTotal = findViewById(R.id.tvPercentualTotal)
+        btnCriarMeta = findViewById<TextView>(R.id.btnCriarMeta)
+        containerMetas = findViewById<LinearLayout>(R.id.containerMetas)
+        tvSemMetas = findViewById<TextView>(R.id.tvSemMetas)
+        tvTotalGuardado = findViewById<TextView>(R.id.tvTotalGuardado)
+        tvObjetivoTotal = findViewById<TextView>(R.id.tvObjetivoTotal)
+        progressoTotalMetas = findViewById<ProgressBar>(R.id.progressoTotalMetas)
+        tvPercentualTotal = findViewById<TextView>(R.id.tvPercentualTotal)
 
 
         btnCriarMeta.setOnClickListener {
@@ -316,7 +321,7 @@ class MetaActivity : AppCompatActivity() {
         val dialogo = AlertDialog.Builder(this)
             .setTitle("Excluir meta")
             .setMessage(
-                "Deseja excluir a meta \"${meta.nome}\"? O valor guardado nela será perdido."
+                "Deseja excluir a meta \"${meta.nome}\"? O valor guardado nela volta para o seu saldo."
             )
             .setNegativeButton("Cancelar", null)
             .setPositiveButton("Excluir") { _, _ ->

@@ -76,6 +76,33 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="SENHA ATUAL"
+                android:textColor="#89958D"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.08" />
+
+            <EditText
+                android:id="@+id/etSenhaAtual"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/fundo_koin"
+                android:drawableStart="@drawable/icone_senha"
+                android:drawablePadding="12dp"
+                android:hint="Senha atual"
+                android:inputType="textPassword"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:singleLine="true"
+                android:textColor="#26332C"
+                android:textColorHint="#89958D"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
                 android:text="NOVA SENHA"
                 android:textColor="#89958D"
                 android:textSize="12sp"
