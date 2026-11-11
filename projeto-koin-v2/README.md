@@ -1192,7 +1192,7 @@ Organização geral: as telas de **acesso e conta** (`login`, `cadastro`, `edita
 3. **Login:** `LoginActivity` busca o usuário pelo e-mail, confere a senha com `GerenciadorSeguranca.verificar` e guarda os dados em `DadosEntrePaginas` (memória). Em caso de erro, mostra uma mensagem genérica.
 4. **Início:** `MenuActivity` calcula, pelos DAOs, receitas e despesas do mês, o saldo disponível (receitas − despesas − valor guardado em metas) e lista as últimas movimentações. O saldo pode ser ocultado.
 5. **Movimentações:** `NovaMovimentacaoActivity` grava uma despesa (`DespesasDao`) ou receita (`ReceitaDao`). `MovimentacaoActivity` busca e filtra o histórico (`TransacaoDao`) e permite excluir um registro após confirmação.
-6. **Metas:** `MetaActivity` cria, edita e exclui metas pelas janelas inferiores; guardar ou retirar valor atualiza `valorGuardado` dentro de uma transação, e o valor guardado é descontado do saldo disponível.
+6. **Metas:** `MetaActivity` cria, edita e exclui metas pelas janelas inferiores; guardar ou retirar valor atualiza `valorGuardado` com um único `UPDATE` (`ajustarValorGuardado`), e o valor guardado é descontado do saldo disponível.
 7. **Relatórios:** `RelatoriosActivity` soma por período (mês, trimestre, ano), desenha o gráfico por categoria e compara o gasto do mês com os limites definidos em `GerenciarLimitesBottomSheet`.
 8. **Conta:** `PerfilActivity` leva a `EditarSenhaActivity` (exige a senha atual) e a `VerInformcoesContaActivity`; permite sair (limpa a sessão) ou excluir a conta (apaga também os dados do usuário).
 9. **Sessão perdida:** se o sistema encerrar o processo e a memória for apagada, as telas internas chamam `exigirSessao()`, que volta ao login.
@@ -1215,7 +1215,7 @@ Organização geral: as telas de **acesso e conta** (`login`, `cadastro`, `edita
 | Telas internas exigem sessão ativa e voltam ao login se ela não existir | `Sessao.kt` |
 | Telas internas não são exportadas no manifesto (só `MainActivity` é a porta de entrada) | `AndroidManifest.xml` |
 | Exclusão da conta remove também os dados do usuário | `UsuarioDao.kt` |
-| Operações compostas em transação (`withTransaction`) | `MetaActivity.kt` e demais |
+| Gravação de limites em transação (`withTransaction`): ou salva tudo, ou nada | `GerenciarLimitesBottomSheet.kt` |
 
 ### Limitações conhecidas (não implementadas)
 
@@ -1224,6 +1224,7 @@ Organização geral: as telas de **acesso e conta** (`login`, `cadastro`, `edita
 - **Sem limite de tentativas de login.**
 - **Sessão só em memória:** não há token nem persistência de login.
 - **PBKDF2 com SHA-1:** escolhido por compatibilidade com `minSdk 24`; SHA-256 exige API 26.
+- **Exclusão da conta sem transação:** `PerfilActivity` apaga despesas, receitas, metas, limites e usuário em chamadas separadas; uma falha no meio pode deixar dados órfãos.
 - **Sem chaves estrangeiras** declaradas: a ligação com o usuário é um `Int` simples, e a limpeza dos dados na exclusão depende do código.
 - **`fallbackToDestructiveMigration`:** uma mudança de versão do banco apaga os dados.
 
